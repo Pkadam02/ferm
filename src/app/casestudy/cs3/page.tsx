@@ -1,12 +1,47 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import CaseStudyForm from "@/Component/CaseStudyForm";
 
 export default function CS3Page() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [showForm, setShowForm] = useState(false);
+
+  const handleViewCaseStudyClick = () => {
+    setShowForm(true);
+  };
+
+  const handleFormSubmit = async (data: { name: string; contact: string; email: string }) => {
+    console.log("Form submitted:", data);
+    try {
+      const response = await fetch('/api/send-case-study', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(result.message);
+        setShowForm(false);
+      } else {
+        alert(`Error: ${result.message}`);
+      }
+    } catch (error) {
+      console.error('Failed to send form data:', error);
+      alert('An error occurred while submitting the form.');
+    }
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+  };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -106,13 +141,13 @@ export default function CS3Page() {
             </div>
 
             {/* Download Button */}
-            <a
-              href="/Case_Study_3.docx"
-              download="Case_Study_3.docx"
+            <button
+              type="button"
+              onClick={handleViewCaseStudyClick}
               className="mt-6 inline-block px-6 py-3 bg-yellow-400 text-gray-900 font-semibold rounded-xl shadow hover:bg-yellow-500 transition-all duration-300"
             >
               View Full Case Study
-            </a>
+            </button>
           </div>
 
           {/* Right Image */}
@@ -128,6 +163,9 @@ export default function CS3Page() {
           </div>
         </div>
       </div>
+      {showForm && (
+        <CaseStudyForm onClose={handleCloseForm} onSubmit={handleFormSubmit} />
+      )}
     </section>
   );
 }
