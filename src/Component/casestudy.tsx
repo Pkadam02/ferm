@@ -3,16 +3,18 @@ import React from "react";
 import gsap from "gsap";
 import { useEffect } from "react";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { useRouter } from "next/navigation";
 
 const CaseStudies: React.FC = () => {
   const caseStudies = [
     {
       id: "01",
-      title: "The Art of Designing 700+ High-Quality Webinar Leads in 30 Days",
+      title: "IT Company Accelerates Webinar Registrations with VR Business Solutions Content Syndication Strategy",
       description:
         "An IT enterprise partnered with VR Business Solutions to execute a webinar promotion campaign that attracted the right decision-makers and generated measurable ROI. Within just 30 days, the campaign successfully delivered 700+ high-quality webinar registrations.",
       img: "study.png",
       buttonText: "Know More",
+      link: "/casestudy/cs1", // Add link for CS1
     },
     {
       id: "02",
@@ -21,8 +23,20 @@ const CaseStudies: React.FC = () => {
         "A prominent Voice over Internet Protocol (VoIP) solutions provider in the US approached VR Business Solution to identify the service needs of targeted industries and expand its business reach. With an aim to consolidate Cloud with VoIP and provide a winning solution for efficient business performance, the company was looking for a partner to introduce and distribute Cloud-based VoIP architecture.",
       img: "/Overlay.png",
       buttonText: "Know More",
+      link: "/casestudy/cs2", // Add link for CS2
+    },
+    {
+      id: "03",
+      title: "Manufacturing Giant Boosts Lead Generation with VR Business Solutions Account-Based Marketing Strategy",
+      description:
+        "A leading manufacturing company partnered with VR Business Solutions to penetrate key accounts and generate high-quality leads. Our tailored Account-Based Marketing (ABM) strategy delivered exceptional results, driving engagement and conversions from target enterprises.",
+      img: "/Overlay.png",
+      buttonText: "Know More",
+      link: "/casestudy/cs3", // Add link for CS3
     },
   ];
+
+  const router = useRouter();
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -120,31 +134,25 @@ const CaseStudies: React.FC = () => {
               </p>
 
               <button
-  className="relative flex items-center gap-1 text-sm text-gray-700 border border-gray-300 rounded-full px-4 py-2 overflow-hidden group transition-all duration-500"
->
-  {/* Text + Arrow */}
-  <span className="relative z-10 flex items-center gap-1 transition-colors duration-500 group-hover:text-black">
-    {study.buttonText}
-    <span className="text-base group-hover:text-black">↳</span>
-  </span>
+                    className="relative flex items-center gap-1 text-sm text-gray-700 border border-gray-300 rounded-full px-4 py-2 overflow-hidden group transition-all duration-500"
+                    onClick={() => router.push(study.link)}
+                  >
+                    {/* Text + Arrow */}
+                    <span className="relative z-10 flex items-center gap-1 transition-colors duration-500 group-hover:text-black">
+                      {study.buttonText}
+                      <span className="text-base group-hover:text-black">↳</span>
+                    </span>
 
-  {/* Animated wave */}
-  <span className="absolute inset-0 bg-yellow-300 top-full group-hover:top-0 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] rounded-full"></span>
-</button>
+                    {/* Animated wave */}
+                    <span className="absolute inset-0 bg-yellow-300 top-full group-hover:top-0 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] rounded-full"></span>
+                  </button>
 
             </div>
           </div>
         ))}
 
         {/* === More Case Studies Button === */}
-        <div className="flex justify-center mt-10 md:mt-12">
-  <button className="relative px-6 py-3 text-base font-semibold text-white bg-[#1C1C57] rounded-md overflow-hidden group transition-colors duration-500">
-    <span className="relative z-10 transition-colors duration-500 group-hover:text-black">
-      More Case Studies
-    </span>
-    <span className="absolute inset-0 bg-yellow-300 top-full group-hover:top-0 transition-all duration-500 ease-in-out rounded-t-[100%]"></span>
-  </button>
-</div>
+        
 
       </div>
     </section>
