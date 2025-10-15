@@ -82,7 +82,7 @@ export default function WhoWeAre() {
               className="rounded-xl overflow-hidden w-full max-w-sm sm:max-w-md lg:max-w-none h-auto"
             >
               <img
-                src="/WeARE.png"
+                src="/We.png"
                 alt="Who We Are Graphic"
                 className="w-full h-full object-cover whoweare-image"
               />
