@@ -1,139 +1,209 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
+import { useState } from "react";
+import { ArrowRight, ChevronRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
-export default function CS1Page() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+export default function FAQPage() {
+  const [active, setActive] = useState<number | null>(null);
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const el = sectionRef.current;
-    if (!el) return;
-
-    // Animate text content
-    gsap.fromTo(
-      ".cs1-text-content",
-      { opacity: 0, x: -120 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".cs1-text-content",
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    // Animate image
-    gsap.fromTo(
-      ".cs1-image-container",
-      { opacity: 0, x: 120 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 1.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".cs1-image-container",
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, []);
+  const faqs = [
+    {
+      id: 1,
+      title: "Is FindTheFirm a law firm?",
+      content:
+        "No, FindTheFirm is not a law firm. We are an independent organization that connects individuals with a network of licensed attorneys and law firms specializing in various legal areas, including mass torts.",
+    },
+    {
+      id: 2,
+      title: "Do I have to pay to use this service?",
+      content:
+        "No, our service is completely free for you to use. We believe everyone should have access to legal assistance without upfront costs. Lawyers in our network typically work on a contingency-fee basis, meaning they only get paid if you win your case.",
+    },
+    {
+      id: 3,
+      title: "Is my personal information secure?",
+      content:
+        "Absolutely. We prioritize the security and confidentiality of your personal information. All data submitted through our platform is encrypted and handled in accordance with strict privacy policies. We only share your information with legal professionals in our network who can assist with your specific case, and only with your consent.",
+    },
+    {
+      id: 4,
+      title: "How do I know if I have a case?",
+      content:
+        "Many factors determine the viability of a legal case. By filling out our form, you'll provide us with initial details about your situation. This information will then be reviewed by experienced legal professionals who can assess the merits of your potential claim and advise you on the best course of action.",
+    },
+    {
+      id: 5,
+      title: "What happens after I fill out the form?",
+      content:
+        "Once you submit the form, our team will review your information and connect you with an attorney or law firm from our network that best matches your legal needs. You can expect to be contacted directly by a legal professional to discuss your case in more detail.",
+    },
+    {
+      id: 6,
+      title: "How long does it take to hear back?",
+      content:
+        "We understand the urgency of legal matters. Typically, you can expect to hear back from a legal professional within 24-48 hours after submitting your form. However, response times may vary depending on the complexity of your case and the availability of attorneys.",
+    },
+    {
+      id: 7,
+      title: "What if I already talked to a lawyer or firm?",
+      content:
+        "Even if you've previously consulted with another lawyer or firm, you're still welcome to use our service. We encourage you to seek multiple opinions to ensure you find the best legal representation for your specific situation. There's no obligation to proceed with any attorney we connect you with.",
+    },
+    {
+      id: 8,
+      title: "Are these lawsuits legitimate?",
+      content:
+        "Yes, the lawsuits we help connect individuals with are legitimate legal actions pursued by qualified attorneys. We work with reputable law firms that specialize in areas like mass torts, product liability, and personal injury, ensuring that all cases are handled with professionalism and integrity.",
+    },
+    {
+      id: 9,
+      title: "What is a mass tort, exactly?",
+      content:
+        "A mass tort is a civil action involving many plaintiffs against one or a few defendants in state or federal court. These cases typically arise when a large group of people has been harmed by the same product, drug, or action by a corporation or entity. Mass torts differ from class actions in that each plaintiff's case is treated individually, even though they are grouped together for efficiency.",
+    },
+    {
+      id: 10,
+      title: "What if my case isn’t listed on your site?",
+      content:
+        "Our website features a range of common legal claims and mass torts, but it's not exhaustive. If your specific case isn't listed, we still encourage you to fill out our form. Our network of attorneys covers a wide array of legal specialties, and we may still be able to connect you with a professional who can assist with your unique situation.",
+    },
+  ];
 
   return (
-    <section
-      ref={sectionRef}
-      id="CS1"
-      className="relative bg-gradient-to-b from-white via-yellow-50 to-white overflow-hidden py-24 lg:py-36"
-    >
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-2 gap-14 items-center">
-          {/* Left Text Content */}
-          <div className="cs1-text-content space-y-6 lg:pl-6">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
-              IT Company Accelerates Webinar Registrations with{" "}
-              <span className="text-yellow-400">VR Business Solutions’</span>{" "}
-              Content Syndication Strategy
-            </h2>
-
-            <p className="text-lg text-gray-700 leading-relaxed">
-              A fast-growing enterprise IT company partnered with{" "}
-              <span className="font-semibold text-yellow-400">
-                VR Business Solutions
-              </span>{" "}
-              to expand its webinar reach and generate qualified leads across
-              multiple regions. Leveraging our{" "}
-              <span className="text-yellow-400 font-medium">
-                data-driven content syndication network
-              </span>
-              , the client achieved exceptional visibility and engagement from
-              key decision-makers.
-            </p>
-
-            <div className="bg-white shadow-lg border border-yellow-200 rounded-2xl p-6 space-y-4">
-              <h3 className="text-xl font-semibold text-yellow-500">
-                ⚡ Key Highlights
-              </h3>
-              <ul className="space-y-2 text-gray-700 list-disc list-inside">
-                <li>
-                  120% increase in webinar registrations within 45 days.
-                </li>
-                <li>
-                  70% of leads originated from targeted industry segments.
-                </li>
-                <li>
-                  3x improvement in engagement through personalized outreach.
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-yellow-100 border border-yellow-300 rounded-2xl p-6 shadow-sm">
-              <h3 className="text-xl font-semibold text-yellow-600">
-                📈 Results
-              </h3>
-              <p className="text-gray-800 mt-2">
-                The campaign delivered exceptional ROI with a{" "}
-                <b>120% increase</b> in registrations and deeper market
-                penetration across key verticals.
-              </p>
-            </div>
-
-            {/* Download Button */}
-            <a
-              href="/Case_Study_1.docx"
-              download="Case_Study_1.docx"
-              className="mt-6 inline-block px-6 py-3 bg-yellow-400 text-gray-900 font-semibold rounded-xl shadow hover:bg-yellow-500 transition-all duration-300"
-            >
-              View Full Case Study
-            </a>
-          </div>
-
-          {/* Right Image */}
-          <div className="cs1-image-container relative w-full h-[360px] sm:h-[450px] lg:h-[820px]">
-            <div className="absolute inset-0 bg-yellow-200 blur-3xl rounded-full opacity-50 -z-10"></div>
-            <Image
-              src="/case-study-webinar.jpg"
-              alt="Webinar case study illustration"
-              fill
-              className="object-contain drop-shadow-2xl"
-              priority
-            />
+    <div className="min-h-screen bg-white">
+      {/* ---------- HEADER SECTION ---------- */}
+      <div
+        className="relative flex items-center justify-center bg-center bg-cover h-[350px] md:h-[350px]"
+        style={{
+          backgroundImage:
+            "url('https://findthefirm.com/wp-content/uploads/2020/12/pheader-service.jpg')",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/5"></div>
+        <div className="relative container mx-40 px-6">
+          <div className="flex items-center justify-left h-full">
+            <h1 className="text-4xl md:text-5xl font-bold text-white text-center">
+              Frequently Asked Questions
+            </h1>
           </div>
         </div>
       </div>
+
+      {/* ---------- INTRO SECTION ---------- */}
+      <section className="max-w-5xl mb-[-60] mx-48 px-6 py-16 text-left">
+        <h2 className="text-3xl font-semibold text-gray-900 mb-4">
+          Your Questions, Answered.
+        </h2>
+        <p className="text-gray-600 leading-relaxed mb-3">
+          We understand how confusing and overwhelming the legal process can
+          feel—especially when you’re already dealing with the emotional and
+          physical toll of being harmed by a product or drug. This page is here
+          to help you get the clarity you need.
+        </p>
+        <p className="text-gray-600 leading-relaxed">
+          If your question isn’t listed here, feel free to reach out to our team
+          directly.
+        </p>
+      </section>
+
+      {/* ---------- FAQ SECTION ---------- */}
+      <section className="max-w-6xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {faqs.map((faq) => (
+          <div key={faq.id} className="flex flex-col">
+            {/* FAQ button */}
+            <button
+              onClick={() => setActive(active === faq.id ? null : faq.id)}
+              className={`flex justify-between items-center w-full px-5 py-4 text-left font-semibold border transition-all duration-300 rounded-md ${
+                active === faq.id
+                  ? "bg-black  text-white"
+                  : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50"
+              }`}
+            >
+              <span>
+                {faq.id}. {faq.title}
+              </span>
+              <motion.div
+                animate={{
+                  rotate: active === faq.id ? -90 : 0,
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                <ArrowRight
+                  className={`w-5 h-5 ${
+                    active === faq.id ? "text-white" : "text-gray-800"
+                  }`}
+                />
+              </motion.div>
+            </button>
+
+            {/* Animated Answer */}
+            <AnimatePresence initial={false}>
+              {active === faq.id && (
+                <motion.div
+                  key={faq.id}
+                  initial={{ height: 0, opacity: 0, y: -8 }}
+                  animate={{ height: "auto", opacity: 1, y: 0 }}
+                  exit={{ height: 0, opacity: 0, y: -8 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="mt-2 ml-2 text-gray-700 border-l-4 border-black pl-4"
+                >
+                  <p className="leading-relaxed text-base">{faq.content}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        ))}
+      </div>
     </section>
+
+      {/* ---------- CTA SECTION ---------- */}
+      <section
+  className="relative bg-cover bg-center text-white py-20 overflow-hidden"
+  style={{
+    backgroundImage:
+      "url('/banner1.jpg')",
+  }}
+>
+  {/* Dark overlay */}
+  <div className="absolute inset-0 bg-white/10"></div>
+
+  {/* Content */}
+  <div className="relative max-w-3xl mx-auto px-6 grid md:grid-cols-2 items-center gap-8">
+    <div>
+      <p className="text-base text-gray-200 font-medium">
+        Our support team is happy to help.
+      </p>
+      <h2 className="text-4xl font-bold leading-snug mt-3">
+        Still Have Questions? <br /> We’re Here for You.
+      </h2>
+    </div>
+
+    <div className="flex md:justify-end justify-center">
+      <a
+        href="/contact-us"
+        className="bg-black text-white px-8 py-3 rounded-md font-semibold shadow-md hover:bg-gray-900 transition"
+      >
+        CONTACT US
+      </a>
+    </div>
+  </div>
+</section>
+
+
+      {/* ---------- LEGAL NOTICE ---------- */}
+      <footer className="text-center text-gray-600 text-sm py-10 border-t border-gray-200 px-6 max-w-5xl mx-auto">
+        <p>
+          <strong>Legal Notice</strong>
+          <br />
+          FindTheFirm is not a law firm and does not provide legal advice. We
+          work with a network of independent, licensed attorneys and law firms.
+          Submission of information does not create an attorney-client
+          relationship. This website may be considered attorney advertising in
+          some jurisdictions. Prior results do not guarantee a similar outcome.
+        </p>
+      </footer>
+    </div>
   );
 }

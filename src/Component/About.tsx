@@ -1,146 +1,88 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import StatsSection from "@/Component/StatsSection";
 
-export default function About() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const el = sectionRef.current;
-    if (!el) return;
-
-    // Animate all children with class "about-fade"
-    // const fadeEls = el.querySelectorAll(".about-fade");
-
-    // gsap.fromTo(
-    //   fadeEls,
-    //   { opacity: 0, y: 500 },
-    //   {
-    //     opacity: 1,
-    //     y: 0,
-    //     duration: 1,
-    //     stagger: 0.3,
-    //     ease: "power3.out",
-    //     scrollTrigger: {
-    //       trigger: el,
-    //       start: "top 80%", // starts when top of section hits 80% of viewport
-    //       toggleActions: "play none none reverse",
-    //       markers: false, // set true for debugging
-    //     },
-    //   }
-    // );
-
-    gsap.fromTo(
-      ".about-text-content",
-      { opacity: 0, x: -900 },
-      { opacity: 1, x: 0, duration: 0.9, ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".about-text-content",
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        }
-      }
-    );
-
-    gsap.fromTo(
-      ".about-image-container",
-      { opacity: 0, x: 900 }, // start slightly off to the right
-      {
-        opacity: 1,
-        x: 0,
-        duration: 1.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".about-image-container",
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, []);
-
+export default function AboutPage() {
   return (
-    <>
-    <section
-        ref={sectionRef}
-        id="aboutus"
-        className="scroll-mt-24 relative overflow-hidden bg-white flex flex-col md:flex-row items-center justify-between px-0 sm:px-8 md:px-12 lg:px-10 py-35 w-full min-h-[90vh] md:py-50 lg:py-20 bg-white"
-        data-scroll-section
-      >
-      <div className="container mx-auto px-4 sm:px-10 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
-          {/* Left Text Content */}
-          <div className="space-y-2 lg:pl-16 about-text-content">
-            <p className="text-sm font-medium text-gray-500 uppercase tracking-wide">
-              About
-            </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-900 leading-tight">
-              About VR <br />
-              <span className="text-blue-900">Business Solution</span>
+    <section className="bg-[#f9f9f9] py-16">
+      <div className="container mx-auto px-6 lg:px-46 space-y-24">
+        {/* Section 1 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+          {/* Text Section */}
+          <div>
+            <span className="uppercase text-sm tracking-widest text-gray-600">
+              About Us
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4 text-gray-900 leading-snug">
+              We Help You Take the First Step Toward Justice
             </h2>
-            <p className="text-base leading-relaxed text-gray-600">
-              At VR Business Solution, we are pioneers in customer acquisition
-              and targeted outreach, helping businesses connect with the right
-              audience both online and offline. Our expertise:
+            <p className="text-gray-600 mb-4">
+              When a drug, medical device, or toxic product causes real harm, you
+              deserve real help. At <strong>FindTheFirm</strong>, we connect you
+              with top-rated law firms handling mass tort cases—so you can take
+              action, without the stress or upfront costs.
             </p>
-
-            <ul className="space-y-2 text-gray-700 text-base">
-              <li className="flex items-start gap-3">
-                <span className="text-yellow-500 text-xl">✔</span>
-                <span>Spans lead generation</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-yellow-500 text-xl">✔</span>
-                <span>Appointment setting, event registrations</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-yellow-500 text-xl">✔</span>
-                <span>Email marketing, digital marketing</span>
-              </li>
-            </ul>
-
-            <button
-  onClick={() => router.push("/aboutus")}
-  className="relative mt-6 px-6 py-3 bg-white border border-gray-300 rounded-full shadow-sm hover:shadow-md transition-all flex items-center gap-2 text-gray-700 w-40 md:w-auto overflow-hidden group"
->
-  {/* Text + Arrow */}
-  <span className="relative z-10 flex items-center gap-2 transition-colors duration-500 group-hover:text-black">
-    Know More
-    <span className="text-gray-500 group-hover:text-black text-xl">→</span>
-  </span>
-
-  {/* Animated wave */}
-  <span className="absolute inset-0 bg-yellow-300 top-full group-hover:top-0 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] rounded-full"></span>
-</button>
-
+            <p className="text-gray-600 mb-6">
+              Whether it’s health complications, cancer, long-term injury, or the
+              loss of a loved one, <strong>you are not alone</strong>—and you may
+              be entitled to compensation.
+            </p>
+            <a
+              href="#active-cases"
+              className="inline-block bg-[#e63946] text-white font-semibold px-6 py-3  hover:bg-[#c72d39] transition"
+            >
+              Start My Free Case Review
+            </a>
           </div>
 
-          {/* Right Visual / Charts */}
-          <div className="about-image-container relative w-[300px] h-[350px] sm:w-[600px] sm:h-[600px] md:w-[560px] md:h-[420px] lg:w-[450px] lg:h-[490px] lg:left-20 z-10 left-10">
-                <Image
-                    src="/about1.png"
-                    alt="Main illustration"
-                    fill
-                    className="object-cover"
-                    priority
-                    />
+          {/* Image Section */}
+          <div className="flex justify-center">
+            <Image
+              src="https://findthefirm.com/wp-content/uploads/2021/10/Advisory-Board-header.jpg"
+              alt="Consultation"
+              width={644}
+              height={430}
+              className="rounded-lg shadow-md"
+            />
+          </div>
+        </div>
+
+        {/* Section 2 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+          {/* Image Section */}
+          <div className="flex justify-center order-1 md:order-none">
+            <Image
+              src="https://findthefirm.com/wp-content/uploads/2021/10/Advisory-Board-header.jpg"
+              alt="Legal Discussion"
+              width={644}
+              height={430}
+              className="rounded-lg shadow-md"
+            />
+          </div>
+
+          {/* Text Section */}
+          <div>
+            <span className="uppercase text-sm tracking-widest text-gray-600">
+              What Is a Mass Tort?
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4 text-gray-900 leading-snug">
+              One Product. Thousands of Victims. One Powerful Legal Action.
+            </h2>
+            <p className="text-gray-600 mb-4">
+              A <strong>mass tort</strong> is a type of legal case where{" "}
+              <strong>many individuals file claims</strong> against the same
+              company for harm caused by a defective product, drug, or
+              environmental hazard. These are{" "}
+              <strong>not class action lawsuits</strong>—you still have your own
+              case, your own compensation, and your own voice.
+            </p>
+            <p className="text-gray-600">
+              We help you understand if your situation qualifies, and then connect
+              you with a vetted attorney to fight for your rights.
+            </p>
           </div>
         </div>
       </div>
     </section>
-      <StatsSection />
-    </>
   );
 }

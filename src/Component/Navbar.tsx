@@ -1,121 +1,160 @@
 "use client";
 
-import { useState } from 'react';
-import Link from 'next/link'; // Import Link component
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function Navbar({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (isOpen: boolean) => void }) {
-  console.log("Navbar isOpen: ", isOpen);
-  // const [isOpen, setIsOpen] = useState(false);
+interface NavbarProps {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}
 
-  // REMOVED handleScrollToSection function
+export default function Navbar({ isOpen, setIsOpen }: NavbarProps) {
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsSticky(window.scrollY > 70);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-2 py-2 bg-yellow-300 text-[#1C1C57] border-b border-white">
-      <div className="flex items-center space-x-2 lg:ml-20">
-        <Link href="/" onClick={() => setIsOpen(false)}> {/* Use Link component */}
-          <img src="title.png" alt="VR Logo" className="h-12" />
-        </Link>
+    <header className="w-full h-31 relative">
+      {/* ===== Top dark bar with logo ===== */}
+      <div className="bg-[#262626] py-8 flex justify-start pl-40 relative">
+        <Image
+          src="/6.png"
+          alt="Find The Firm"
+          width={120}
+          height={50}
+          className="object-contain"
+        />
       </div>
 
-      {/* Desktop navigation */}
-      <ul className="hidden lg:flex space-x-6 lg:space-x-8 xl:space-x-10 text-[var(--hcolor)] font-medium text-sm">
- 
-  <li>
-    <Link
-      href="/#about"
-      onClick={() => setIsOpen(false)}
-      className="relative px-6 py-1 font-semibold text-[#1C1C57] inline-block text-center overflow-hidden group"
-    >
-      <span className="relative z-10">About</span>
-      <span className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-black group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
-    </Link>
-  </li>
-  <li>
-    <Link
-      href="/#services"
-      onClick={() => setIsOpen(false)}
-      className="relative px-6 py-1 font-semibold text-[#1C1C57] inline-block text-center overflow-hidden group"
-    >
-      <span className="relative z-10">Services</span>
-      <span className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-black group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
-    </Link>
-  </li>
-  <li>
-    <Link
-      href="/#methodology"
-      onClick={() => setIsOpen(false)}
-      className="relative px-6 py-1 font-semibold text-[#1C1C57] inline-block text-center overflow-hidden group"
-    >
-      <span className="relative z-10">Methodology</span>
-      <span className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-black group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
-    </Link>
-  </li>
-  <li>
-    <Link
-      href="/#casestudy"
-      onClick={() => setIsOpen(false)}
-      className="relative px-6 py-1 font-semibold text-[#1C1C57] inline-block text-center overflow-hidden group"
-    >
-      <span className="relative z-10">Case Study</span>
-      <span className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-black group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
-    </Link>
-  </li>
-  <li>
-    <Link
-      href="/contact"
-      onClick={() => setIsOpen(true)}
-      className="relative px-6 py-1 font-semibold text-[#1C1C57] inline-block text-center overflow-hidden group"
-    >
-      <span className="relative z-10">Contact Us</span>
-      <span className="absolute bottom-0 left-1/2 w-0 h-[2px] bg-black group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
-    </Link>
-  </li>
-</ul>
-
-      <div className="hidden lg:flex items-center text-[var(--hcolor)] gap-4 lg:mr-20 text-sm">
-        +91 7524963552 <br />
-        +91 8585856595
+      {/* ===== White navbar section ===== */}
+      <div className="relative">
+        <AnimatePresence mode="wait">
+          {isSticky ? (
+            // Sticky version
+            <motion.section
+              key="sticky"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="fixed top-0 left-0 w-full bg-white shadow-lg z-50"
+            >
+              <div className="max-w-7xl mx-auto bg-white">
+                <NavbarContent isOpen={isOpen} setIsOpen={setIsOpen} />
+              </div>
+            </motion.section>
+          ) : (
+            // Default position
+            <section className="relative bg-transparent z-40">
+              <div className="max-w-7xl mx-auto -mt-6 bg-white shadow-md rounded-sm">
+                <NavbarContent isOpen={isOpen} setIsOpen={setIsOpen} />
+              </div>
+            </section>
+          )}
+        </AnimatePresence>
       </div>
+    </header>
+  );
+}
 
-      {/* Mobile menu button */}
-      <div className="lg:hidden flex items-center z-[100]">
-        <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none p-2 rounded-md hover:bg-gray-700 transition-colors duration-200">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            {isOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            )}
-          </svg>
-        </button>
-      </div>
+/* ✅ NavbarContent component */
+function NavbarContent({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}) {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-      {/* Sidebar */}
-      <div className={`fixed inset-y-0 right-0 w-full max-w-sm bg-yellow-300 z-[90] transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out lg:hidden overflow-y-auto`}>
-        <div className="flex justify-end p-15">
-          <button onClick={() => setIsOpen(false)} className="text-white focus:outline-none p-2 rounded-md hover:bg-gray-700 transition-colors duration-200">
+  return (
+    <div className="flex justify-start items-center">
+      <ul className="flex flex-wrap items-center space-x-10 py-4 text-[15px] font-semibold text-gray-900 ml-10">
+        <li>
+          <Link href="/" className="hover:text-red-500 transition">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link href="/about-us" className="hover:text-red-500 transition">
+            About Us
+          </Link>
+        </li>
+        <li>
+          <Link href="/faq" className="hover:text-red-500 transition">
+            Frequently Asked Questions
+          </Link>
+        </li>
 
+        {/* ===== Dropdown ===== */}
+        <li
+          className="relative"
+          onMouseEnter={() => setDropdownOpen(true)}
+          onMouseLeave={() => setDropdownOpen(false)}
+        >
+          <button className="flex items-center hover:text-red-500 transition">
+            Active Lawsuits
+            <svg
+              className="ml-1 w-4 h-4 text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
           </button>
-        </div>
-        <ul className="flex flex-col items-center space-y-6 text-[var(--hcolor)] font-medium py-6">
-        <li><Link href="/#about" onClick={() => setIsOpen(false)} className="hover:text-blue-700 transition-colors duration-200 text-[#1C1C57] text-base">About</Link></li>
-          <li><Link href="/#services" onClick={() => setIsOpen(false)} className="hover:text-blue-700 transition-colors duration-200 text-[#1C1C57] text-base">Services</Link></li>
-          <li><Link href="/#methodology" onClick={() => setIsOpen(false)} className="hover:text-blue-700 transition-colors duration-200 text-[#1C1C57] text-base">Methodology</Link></li>
-          <li><Link href="/#casestudy" onClick={() => setIsOpen(false)} className="hover:text-blue-700 transition-colors duration-200 text-[#1C1C57] text-base">Case Study</Link></li>
-          <li><Link href="/contact" onClick={() => setIsOpen(false)} className="hover:text-blue-700 transition-colors duration-200 text-[#1C1C57] text-base">Contact Us</Link></li>
-        </ul>
-        <div className="flex flex-col space-y-4 mt-8 items-center text-[var(--hcolor)] px-4">
-        <div className=" md:flex items-center gap-4 right-20 text-base">
-        +91 7524963552 <br />
-        +91 8585856595
-      </div>
-        </div>
-      </div>
 
-      {/* Overlay */}
-      {isOpen && (
-        <div onClick={() => setIsOpen(false)} className="fixed inset-0 bg-black bg-opacity-50 z-[80] lg:hidden"></div>
-      )}
-    </nav>
+          <AnimatePresence>
+            {dropdownOpen && (
+              <motion.ul
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="absolute left-0 mt-3 bg-white shadow-xl border border-gray-100 rounded-md w-64 py-2 z-50"
+              >
+                {[
+                  ["Paraquat Case Review", "/paraquat-case-review"],
+                  ["AFFF Firefighting Case Review", "/afff-firefighting-case-review"],
+                  ["NEC Baby Formula Case Review", "/nec-baby-formula-case-review"],
+                  ["Talcum Powder Case Review", "/talcum-powder-case-review"],
+                  ["Roundup Case Review", "/roundup-case-review"],
+                  ["Depo-Provera Free Case Review", "/depo-provera-lawsuit"],
+                  ["No-Cost MVA Case Evaluation", "/no-cost-mva-case-evaluation"],
+                  ["Roblox Abuse Lawsuit", "/roblox-abuse-lawsuit"],
+                  ["Institutional Sexual Abuse Case Review", "/institutional-sexual-abuse-case-review"],
+                ].map(([label, href]) => (
+                  <motion.li
+                    key={href}
+                    whileHover={{ x: 4 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <Link
+                      href={href}
+                      className="block px-4 py-2 text-[14px] text-gray-800 hover:bg-gray-100 hover:text-[#dc2626] transition"
+                    >
+                      {label}
+                    </Link>
+                  </motion.li>
+                ))}
+              </motion.ul>
+            )}
+          </AnimatePresence>
+        </li>
+
+        <li>
+          <Link href="/contact" className="hover:text-red-500 transition">
+            Contact Us
+          </Link>
+        </li>
+      </ul>
+    </div>
   );
 }

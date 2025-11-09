@@ -52,7 +52,7 @@ const Process: React.FC = () => {
   const displaySteps = [null, ...steps]; // Add a null placeholder for the empty first box
 
   return (
-    <section id="methodology" className="bg-white relative overflow-hidden bg-white
+    <section id="methodology" className="bg-green relative overflow-hidden bg-white
         flex flex-col md:flex-row items-center justify-between
         px-0 sm:px-8 md:px-12 lg:px-10 lg:py-52 py-50
         w-full min-h-[90vh] md:py-60 bg-white data-scroll-section" >

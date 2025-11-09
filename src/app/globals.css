@@ -18,7 +18,8 @@ html {
 
 body {
   @apply bg-white text-gray-800;
-   background-color: #ffc200;
+   background-color: #ffffff;
+   background-lor: #a49d9d57;
 }
 
 .font-poppins {

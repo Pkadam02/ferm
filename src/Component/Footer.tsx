@@ -1,146 +1,154 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import Image from "next/image";
 import Link from "next/link";
-import { useInView } from "react-intersection-observer"; // <-- import
+import { Mail } from "lucide-react";
 
-export default function Footer() {
-  const footerRef = useRef<HTMLDivElement>(null);
-  const [inViewRef, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+interface FooterProps {
+  logoWidth?: number;
+  logoHeight?: number;
+}
 
-  // Combine refs
-  const setRefs = (el: HTMLDivElement) => {
-    footerRef.current = el;
-    inViewRef(el);
-  };
-
-  useLayoutEffect(() => {
-    if (!inView) return; // only trigger GSAP when in view
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".footer-logo-contact",
-        { opacity: 0, y: 800, scale: 0.9 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".footer-logo-contact",
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-
-      (gsap.utils.toArray(".footer-column") as HTMLElement[]).forEach((column, index) => {
-        gsap.fromTo(
-          column,
-          { opacity: 0, y: 50, rotationX: 15 },
-          {
-            opacity: 1,
-            y: 0,
-            rotationX: 0,
-            duration: 1,
-            ease: "power3.out",
-            delay: index * 0.2,
-            scrollTrigger: {
-              trigger: column,
-              start: "top 95%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      });
-    }, footerRef);
-
-    return () => ctx.revert();
-  }, [inView]); 
-
+export default function Footer({
+  logoWidth = 120,
+  logoHeight = 50,
+}: FooterProps) {
   return (
-    <footer ref={footerRef} className="bg-[#27344D] text-white py-16 md:py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-12">
-          {/* Logo and Contact Info */}
-          <div className="flex flex-col items-center sm:items-start text-center sm:text-left col-span-1 sm:col-span-2 lg:col-span-1 mb-8 sm:mb-0 footer-logo-contact">
-            <img src="title2.png" alt="VR Business Solutions" className="h-12 mb-4" />
+    <footer className="bg-[#1E1E1E] text-gray-300 pt-20 pb-10 px-6 lg:px-44 font-inter">
+      {/* MAIN GRID */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-14">
+        {/* ---------- LEFT: LOGO + TEXT ---------- */}
+        <div className="space-y-5">
+          <div className="flex items-center">
+            <Image
+              src="/6.png"
+              alt="FindTheFirm Logo"
+              width={logoWidth}
+              height={logoHeight}
+              className="object-contain"
+            />
           </div>
 
-          {/* Hawaii Main Office */}
-          <div className="text-center sm:text-left footer-column">
-            <h3 className="text-lg font-bold mb-4">Hawaii Main Office</h3>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>66 West Flagler Street - Suite 900</li>
-              <li>Miami, FL 33130, USA</li>
-              <li>+1 786 406 6061</li>
-              <li>E: contact@vr-bs.com</li>
-            </ul>
-          </div>
-
-          {/* World Offices */}
-          <div className="text-center sm:text-left footer-column">
-            <h3 className="text-lg font-bold mb-4">World Offices</h3>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>Pune, India</li>
-              <li>USA - San Francisco</li>
-            </ul>
-          </div>
-
-          {/* Expertise */}
-          <div className="text-center sm:text-left footer-column">
-            <h3 className="text-lg font-bold mb-4">Expertise</h3>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>
-                <Link href="/" className="hover:text-white transition-colors duration-200">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/#about" className="hover:text-white transition-colors duration-200">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/#services" className="hover:text-white transition-colors duration-200">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link href="/#casestudy" className="hover:text-white transition-colors duration-200">
-                  Blogs
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white transition-colors duration-200">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div className="text-center sm:text-left footer-column">
-            <h3 className="text-lg font-bold mb-4">Services</h3>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li className="hover:text-white transition-colors cursor-pointer">Software Development</li>
-              <li className="hover:text-white transition-colors cursor-pointer">Demand Generation</li>
-              <li className="hover:text-white transition-colors cursor-pointer">Appointment Generation</li>
-              <li className="hover:text-white transition-colors cursor-pointer">Content Syndication</li>
-              <li className="hover:text-white transition-colors cursor-pointer">Event & Webinar Registration</li>
-            </ul>
-          </div>
+          <p className="text-mb leading-relaxed text-gray-300 tracking-[0.025em]">
+            <span className="text-white font-semibold">FindTheFirm</span> helps
+            individuals harmed by dangerous drugs, medical devices, or toxic
+            exposures get connected to trusted legal professionals. We’re not a
+            law firm—we’re your first step toward justice, offering free case
+            evaluations and connections to qualified mass tort attorneys across
+            the U.S.
+          </p>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-gray-600 mt-12 pt-6 text-center text-gray-400 text-sm">
-          © {new Date().getFullYear()} VR Business Solutions. All Rights Reserved.
+        {/* ---------- QUICK LINKS ---------- */}
+        <div>
+          <h4 className="text-white font-semibold text-[17px] mb-9 tracking-wide">
+            Quick Links
+          </h4>
+          <ul className="space-y-[15px]">
+            <li className="relative">
+              <Link
+                href="/"
+                className="text-white font-semibold after:absolute rounded-lg after:left-[-30] after:-bottom-[8px] after:w-[300px] after:h-[4px] after:bg-[#a49d9d57]"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/about"
+                className="hover:text-white text-gray-300 font-medium transition-colors duration-200"
+              >
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/faq"
+                className="hover:text-white text-gray-300 font-medium transition-colors duration-200"
+              >
+                Frequently Asked Questions
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/lawsuits"
+                className="hover:text-white text-gray-300 font-medium transition-colors duration-200 flex items-center gap-1"
+              >
+                Active Lawsuits <span className="text-gray-400">▼</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contact"
+                className="hover:text-white text-gray-300 font-medium transition-colors duration-200"
+              >
+                Contact Us
+              </Link>
+            </li>
+          </ul>
         </div>
+
+        {/* ---------- LEGAL LINKS ---------- */}
+        <div>
+          <h4 className="text-white font-semibold text-[17px] mb-9 tracking-wide">
+            Legal Links
+          </h4>
+          <ul className="space-y-[10px]">
+            <li>
+              <Link
+                href="/aboutus"
+                className="hover:text-white text-gray-300 font-medium transition-colors duration-200"
+              >
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/Service#s1"
+                className="hover:text-white text-gray-300 font-medium transition-colors duration-200"
+              >
+                Terms & Conditions
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* ---------- CONTACT US ---------- */}
+        <div>
+          <h4 className="text-white font-semibold text-[25px] mb-9 tracking-wide">
+            Contact Us
+          </h4>
+          <div className="flex items-start space-x-3">
+            <Mail className="w-[25px] h-[25px] text-white mt-[3px]" />
+            <div>
+              <p className="text-gray-400 text-[18px] mb-[2px]">Mail Us</p>
+              <a
+                href="mailto:info@findthefirm.com"
+                className="text-white text-[14px] font-semibold hover:text-red-500 transition-colors duration-200"
+              >
+                info@findthefirm.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ---------- DISCLAIMER ---------- */}
+      <div className="max-w-7xl mx-auto mt-14 border-t border-gray-700 pt-6">
+        <p className="text-xs text-gray-500 leading-relaxed italic tracking-wide">
+          <span className="not-italic font-semibold text-gray-400">
+            Disclaimer:
+          </span>{" "}
+          FindTheFirm is not a law firm and does not provide legal advice. We
+          connect individuals with law firms who may offer legal representation.
+          This is attorney advertising. Results vary.
+        </p>
+      </div>
+
+      {/* ---------- COPYRIGHT ---------- */}
+      <div className="text-center text-[12px] text-gray-500 mt-6 tracking-wide">
+        © {new Date().getFullYear()} |{" "}
+        <span className="text-white font-medium">FindTheFirm</span>
       </div>
     </footer>
   );

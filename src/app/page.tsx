@@ -40,11 +40,10 @@ export default function Home() {
     <main data-scroll-container>
      
       <Hero data-scroll-section />
-      <Partners data-scroll-section />
       <About data-scroll-section />
-      <Services data-scroll-section />
+ 
       <WhoWeAre data-scroll-section />
-      <Methodology data-scroll-section />
+    
       <CaseStud data-scroll-section />
       <Testimonials data-scroll-section />
       <CTA data-scroll-section />
