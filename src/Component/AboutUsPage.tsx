@@ -253,7 +253,7 @@ export default function AboutUs() {
         <div className="container mx-auto px-56 grid md:grid-cols-2 gap-10 items-center">
           <div>
             <h3 className="text-3xl md:text-4xl font-bold mb-4">
-              Have Questions? We're Real People.
+              Have Questions? We&apos;re Real People.
             </h3>
             <p className="mb-6">
               Need help or have a question before you fill out a form? Reach out

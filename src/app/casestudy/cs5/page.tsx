@@ -21,7 +21,7 @@ type FormShape = {
 
 export default function RoundupCasePage() {
   const phoneRef = useRef<HTMLInputElement | null>(null);
-  const itiRef = useRef<any>(null);
+  const itiRef = useRef<HTMLInputElement & { isValidNumber?: () => boolean; getNumber?: () => string; setNumber?: (num: string) => void; }>(null);
   const [msg, setMsg] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState<FormShape>({
@@ -315,7 +315,7 @@ export default function RoundupCasePage() {
 }
 
 /* Small Accordion component */
-function Accordion({ title, children, defaultOpen = false }: { title: string; children: any; defaultOpen?: boolean }) {
+function Accordion({ title, children, defaultOpen = false }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) {
   const [open, setOpen] = useState<boolean>(defaultOpen);
   return (
     <div className="border-b">

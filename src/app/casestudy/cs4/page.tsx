@@ -291,7 +291,7 @@ export default function TalcumPowderCaseReview() {
   );
 }
 
-function Accordion({ title, children, defaultOpen = false }: { title: string; children: any; defaultOpen?: boolean }) {
+function Accordion({ title, children, defaultOpen = false }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) {
     const [open, setOpen] = useState<boolean>(defaultOpen);
     return (
       <div className="border rounded">
