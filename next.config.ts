@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "findthefirm.com",
         port: "",
-        pathname: "/wp-content/uploads/**",
+        pathname: "/**",
       },
     ],
   },

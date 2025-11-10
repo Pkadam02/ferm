@@ -3,7 +3,7 @@
 export default function CTASection() {
   return (
     <section className="relative bg-white text-black py-24 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mt-[-80] mx-auto px-6">
         {/* Box with image background */}
         <div
           className="relative overflow-hidden shadow-2xl text-center p-12"

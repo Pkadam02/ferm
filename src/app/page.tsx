@@ -10,8 +10,9 @@ import Methodology from "@/Component/Methodology";
 import Testimonials from "@/Component/Testimonials";
 import CTA from "@/Component/CTA";
 import Footer from "@/Component/Footer";
-import CaseStud from "@/Component/casestudy";
 import { useState, useEffect } from "react";
+import FAQPreview from "@/Component/FAQ";
+import CaseStudies from "@/Component/casestudy";
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -43,15 +44,16 @@ export default function Home() {
       <About data-scroll-section />
  
       <WhoWeAre data-scroll-section />
-    
-      <CaseStud data-scroll-section />
+
+      <CaseStudies data-scroll-section/>
+      <FAQPreview />
       <Testimonials data-scroll-section />
       <CTA data-scroll-section />
 
       <button
         id="back-to-top"
         onClick={scrollToTop}
-        className={`fixed bottom-6 right-6 p-4 rounded-full bg-yellow-300 text-blue-900 shadow-lg transition-all duration-500 hover:bg-yellow-400 focus:outline-none z-50 hover:scale-110 ${showButton && !isNavbarOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        className={`fixed bottom-6 right-6 p-4  bg-red-500 text-white shadow-lg transition-all duration-500 hover:bg-red-400 focus:outline-none z-50 hover:scale-110 ${showButton && !isNavbarOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         aria-label="Back to top"
       >
         <ArrowUp className="h-5 w-5" />

@@ -36,13 +36,13 @@ export default function Navbar({ isOpen, setIsOpen }: NavbarProps) {
       <div className="relative">
         <AnimatePresence mode="wait">
           {isSticky ? (
-            // Sticky version
+            // Sticky version with smooth slide down
             <motion.section
               key="sticky"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
+              initial={{ y: -80 }}
+              animate={{ y: 0 }}
+              exit={{ y: -80 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               className="fixed top-0 left-0 w-full bg-white shadow-lg z-50"
             >
               <div className="max-w-7xl mx-auto bg-white">
@@ -82,12 +82,12 @@ function NavbarContent({
           </Link>
         </li>
         <li>
-          <Link href="/about-us" className="hover:text-red-500 transition">
+          <Link href="/aboutus" className="hover:text-red-500 transition">
             About Us
           </Link>
         </li>
         <li>
-          <Link href="/faq" className="hover:text-red-500 transition">
+          <Link href="/FAQ" className="hover:text-red-500 transition">
             Frequently Asked Questions
           </Link>
         </li>
@@ -121,15 +121,15 @@ function NavbarContent({
                 className="absolute left-0 mt-3 bg-white shadow-xl border border-gray-100 rounded-md w-64 py-2 z-50"
               >
                 {[
-                  ["Paraquat Case Review", "/paraquat-case-review"],
-                  ["AFFF Firefighting Case Review", "/afff-firefighting-case-review"],
-                  ["NEC Baby Formula Case Review", "/nec-baby-formula-case-review"],
-                  ["Talcum Powder Case Review", "/talcum-powder-case-review"],
-                  ["Roundup Case Review", "/roundup-case-review"],
-                  ["Depo-Provera Free Case Review", "/depo-provera-lawsuit"],
-                  ["No-Cost MVA Case Evaluation", "/no-cost-mva-case-evaluation"],
-                  ["Roblox Abuse Lawsuit", "/roblox-abuse-lawsuit"],
-                  ["Institutional Sexual Abuse Case Review", "/institutional-sexual-abuse-case-review"],
+                  ["Paraquat Case Review", "/casestudy/cs1"],
+                  ["AFFF Firefighting Case Review", "/casestudy/cs2"],
+                  ["NEC Baby Formula Case Review", "/casestudy/cs3"],
+                  ["Talcum Powder Case Review", "/casestudy/cs4"],
+                  ["Roundup Case Review", "/casestudy/cs5"],
+                  ["Depo-Provera Free Case Review", "/casestudy/cs6"],
+                  ["No-Cost MVA Case Evaluation", "/casestudy/cs7"],
+                  ["Roblox Abuse Lawsuit", "/casestudy/cs8"],
+                  ["Institutional Sexual Abuse Case Review", "/casestudy/cs9"],
                 ].map(([label, href]) => (
                   <motion.li
                     key={href}

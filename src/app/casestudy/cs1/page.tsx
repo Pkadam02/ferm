@@ -1,209 +1,285 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
-import { ArrowRight, ChevronRight } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
 
-export default function FAQPage() {
-  const [active, setActive] = useState<number | null>(null);
+    
+    
 
-  const faqs = [
-    {
-      id: 1,
-      title: "Is FindTheFirm a law firm?",
-      content:
-        "No, FindTheFirm is not a law firm. We are an independent organization that connects individuals with a network of licensed attorneys and law firms specializing in various legal areas, including mass torts.",
-    },
-    {
-      id: 2,
-      title: "Do I have to pay to use this service?",
-      content:
-        "No, our service is completely free for you to use. We believe everyone should have access to legal assistance without upfront costs. Lawyers in our network typically work on a contingency-fee basis, meaning they only get paid if you win your case.",
-    },
-    {
-      id: 3,
-      title: "Is my personal information secure?",
-      content:
-        "Absolutely. We prioritize the security and confidentiality of your personal information. All data submitted through our platform is encrypted and handled in accordance with strict privacy policies. We only share your information with legal professionals in our network who can assist with your specific case, and only with your consent.",
-    },
-    {
-      id: 4,
-      title: "How do I know if I have a case?",
-      content:
-        "Many factors determine the viability of a legal case. By filling out our form, you'll provide us with initial details about your situation. This information will then be reviewed by experienced legal professionals who can assess the merits of your potential claim and advise you on the best course of action.",
-    },
-    {
-      id: 5,
-      title: "What happens after I fill out the form?",
-      content:
-        "Once you submit the form, our team will review your information and connect you with an attorney or law firm from our network that best matches your legal needs. You can expect to be contacted directly by a legal professional to discuss your case in more detail.",
-    },
-    {
-      id: 6,
-      title: "How long does it take to hear back?",
-      content:
-        "We understand the urgency of legal matters. Typically, you can expect to hear back from a legal professional within 24-48 hours after submitting your form. However, response times may vary depending on the complexity of your case and the availability of attorneys.",
-    },
-    {
-      id: 7,
-      title: "What if I already talked to a lawyer or firm?",
-      content:
-        "Even if you've previously consulted with another lawyer or firm, you're still welcome to use our service. We encourage you to seek multiple opinions to ensure you find the best legal representation for your specific situation. There's no obligation to proceed with any attorney we connect you with.",
-    },
-    {
-      id: 8,
-      title: "Are these lawsuits legitimate?",
-      content:
-        "Yes, the lawsuits we help connect individuals with are legitimate legal actions pursued by qualified attorneys. We work with reputable law firms that specialize in areas like mass torts, product liability, and personal injury, ensuring that all cases are handled with professionalism and integrity.",
-    },
-    {
-      id: 9,
-      title: "What is a mass tort, exactly?",
-      content:
-        "A mass tort is a civil action involving many plaintiffs against one or a few defendants in state or federal court. These cases typically arise when a large group of people has been harmed by the same product, drug, or action by a corporation or entity. Mass torts differ from class actions in that each plaintiff's case is treated individually, even though they are grouped together for efficiency.",
-    },
-    {
-      id: 10,
-      title: "What if my case isn’t listed on your site?",
-      content:
-        "Our website features a range of common legal claims and mass torts, but it's not exhaustive. If your specific case isn't listed, we still encourage you to fill out our form. Our network of attorneys covers a wide array of legal specialties, and we may still be able to connect you with a professional who can assist with your unique situation.",
-    },
-  ];
-
+export default function CaseStudy1() {
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
+  
+    const faqs = [
+      {
+        question: "Dangers of AFFF",
+        answer:
+          "Firefighting foam (AFFF) contains PFAS chemicals — known as 'forever chemicals' — which can accumulate in the body and the environment. Studies have linked AFFF exposure to increased risks of certain cancers, thyroid disorders, and immune system issues.",
+      },
+      {
+        question: "PFQA Claims are Settled by DuPont and Chemours",
+        answer:
+          "Several manufacturers of AFFF, including DuPont and Chemours, have faced lawsuits over PFAS contamination. These companies have agreed to pay millions in settlements for communities and individuals affected by toxic exposure.",
+      },
+    ];
   return (
-    <div className="min-h-screen bg-white">
-      {/* ---------- HEADER SECTION ---------- */}
-      <div
-        className="relative flex items-center justify-center bg-center bg-cover h-[350px] md:h-[350px]"
-        style={{
-          backgroundImage:
-            "url('https://findthefirm.com/wp-content/uploads/2020/12/pheader-service.jpg')",
-        }}
+    <section className="bg-grey-900 text-gray-800">
+      {/* Header Section */}
+      <div className="relative bg-cover bg-center h-[400px] flex items-center justify-start"
+        
       >
-        <div className="absolute inset-0 bg-black/5"></div>
-        <div className="relative container mx-40 px-6">
-          <div className="flex items-center justify-left h-full">
-            <h1 className="text-4xl md:text-5xl font-bold text-white text-center">
-              Frequently Asked Questions
-            </h1>
-          </div>
+        <div className="bg-black absolute inset-0"></div>
+        <div className="relative z-10 text-center ml-50">
+          <h1 className="text-4xl md:text-5xl font-bold text-white">
+            Paraquat Case Review
+          </h1>
         </div>
       </div>
 
-      {/* ---------- INTRO SECTION ---------- */}
-      <section className="max-w-5xl mb-[-60] mx-48 px-6 py-16 text-left">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-4">
-          Your Questions, Answered.
-        </h2>
-        <p className="text-gray-600 leading-relaxed mb-3">
-          We understand how confusing and overwhelming the legal process can
-          feel—especially when you’re already dealing with the emotional and
-          physical toll of being harmed by a product or drug. This page is here
-          to help you get the clarity you need.
-        </p>
-        <p className="text-gray-600 leading-relaxed">
-          If your question isn’t listed here, feel free to reach out to our team
-          directly.
-        </p>
-      </section>
+      {/* Content Section */}
+      <section className="max-w-6xl mx-auto px-6 py-12 md:py-16">
+      <div className="grid md:grid-cols-2 gap-10 items-center">
+        {/* LEFT IMAGE */}
+        <div>
+          <Image
+            src="https://findthefirm.com/wp-content/uploads/2022/10/iStock-1207411602-1.jpg"
+            alt="Paraquat Lawsuit"
+            width={800}
+            height={600}
+            className="rounded-md shadow-sm w-full object-cover"
+          />
+        </div>
 
-      {/* ---------- FAQ SECTION ---------- */}
-      <section className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {faqs.map((faq) => (
-          <div key={faq.id} className="flex flex-col">
-            {/* FAQ button */}
-            <button
-              onClick={() => setActive(active === faq.id ? null : faq.id)}
-              className={`flex justify-between items-center w-full px-5 py-4 text-left font-semibold border transition-all duration-300 rounded-md ${
-                active === faq.id
-                  ? "bg-black  text-white"
-                  : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50"
-              }`}
-            >
-              <span>
-                {faq.id}. {faq.title}
-              </span>
-              <motion.div
-                animate={{
-                  rotate: active === faq.id ? -90 : 0,
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                <ArrowRight
-                  className={`w-5 h-5 ${
-                    active === faq.id ? "text-white" : "text-gray-800"
-                  }`}
-                />
-              </motion.div>
-            </button>
+        {/* RIGHT CONTENT */}
+        <div>
+          <h2 className="text-xl md:text-2xl font-semibold text-[#2d2d2d] mb-4">
+            Who Can File a Paraquat Lawsuit ?
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4 text-[15px]">
+            Anyone who has been exposed to paraquat and has developed Parkinson’s
+            disease may decide to file a claim, but the only way to know for sure
+            is to speak with a lawyer.
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-6 text-[15px]">
+            Although some types of paraquat exposure are more difficult to detect
+            than others, a skilled lawyer can assist you in proving your case.
+          </p>
 
-            {/* Animated Answer */}
-            <AnimatePresence initial={false}>
-              {active === faq.id && (
-                <motion.div
-                  key={faq.id}
-                  initial={{ height: 0, opacity: 0, y: -8 }}
-                  animate={{ height: "auto", opacity: 1, y: 0 }}
-                  exit={{ height: 0, opacity: 0, y: -8 }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="mt-2 ml-2 text-gray-700 border-l-4 border-black pl-4"
-                >
-                  <p className="leading-relaxed text-base">{faq.content}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        ))}
+          <button className="bg-[#d62814] text-white font-semibold text-[14px] px-6 py-3 rounded shadow-md hover:bg-[#b91c0c] transition-all">
+            REVIEW MY CASE
+          </button>
+        </div>
+      </div>
+
+      {/* BOTTOM TEXT SECTION */}
+      <div className="mt-12">
+        <h3 className="text-lg md:text-xl font-semibold text-[#2d2d2d] mb-4">
+          People who may qualify to file a paraquat lawsuit include:
+        </h3>
+
+        <ul className="space-y-2 text-gray-800 text-[15px] leading-relaxed">
+          <li className="flex items-start">
+            <span className="text-[#2d2d2d] mr-2">✔</span>
+            Agricultural workers including farmers, licensed paraquat applicators,
+            growers, pickers, and landscapers
+          </li>
+          <li className="flex items-start">
+            <span className="text-[#2d2d2d] mr-2">✔</span>
+            People who live near farmland sprayed with paraquat
+          </li>
+          <li className="flex items-start">
+            <span className="text-[#2d2d2d] mr-2">✔</span>
+            Anyone who works around commercial weed killers and pesticides
+          </li>
+        </ul>
       </div>
     </section>
 
-      {/* ---------- CTA SECTION ---------- */}
-      <section
-  className="relative bg-cover bg-center text-white py-20 overflow-hidden"
-  style={{
-    backgroundImage:
-      "url('/banner1.jpg')",
-  }}
->
-  {/* Dark overlay */}
-  <div className="absolute inset-0 bg-white/10"></div>
-
-  {/* Content */}
-  <div className="relative max-w-3xl mx-auto px-6 grid md:grid-cols-2 items-center gap-8">
-    <div>
-      <p className="text-base text-gray-200 font-medium">
-        Our support team is happy to help.
-      </p>
-      <h2 className="text-4xl font-bold leading-snug mt-3">
-        Still Have Questions? <br /> We’re Here for You.
-      </h2>
-    </div>
-
-    <div className="flex md:justify-end justify-center">
-      <a
-        href="/contact-us"
-        className="bg-black text-white px-8 py-3 rounded-md font-semibold shadow-md hover:bg-gray-900 transition"
-      >
-        CONTACT US
-      </a>
-    </div>
-  </div>
-</section>
-
-
-      {/* ---------- LEGAL NOTICE ---------- */}
-      <footer className="text-center text-gray-600 text-sm py-10 border-t border-gray-200 px-6 max-w-5xl mx-auto">
-        <p>
-          <strong>Legal Notice</strong>
-          <br />
-          FindTheFirm is not a law firm and does not provide legal advice. We
-          work with a network of independent, licensed attorneys and law firms.
-          Submission of information does not create an attorney-client
-          relationship. This website may be considered attorney advertising in
-          some jurisdictions. Prior results do not guarantee a similar outcome.
+      {/* Case Review Form */}
+       <section className="bg-white py-16" id="review-form">
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">
+        Case Review
+        </h2>
+        <p className="text-center text-gray-600 mb-10">
+          If you or a loved one were exposed to Paraquat and diagnosed with
+          Parkinson’s disease, please complete the form below for a free review.
         </p>
-      </footer>
-    </div>
+
+        <form className="bg-white p-8  space-y-6">
+          {/* Name Fields */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="block font-medium text-gray-700 mb-2">
+                First Name <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="First Name"
+                className="w-full border border-gray-300 p-3 rounded focus:ring-2 focus:ring-red-600 outline-none"
+                required
+              />
+            </div>
+            <div>
+              <label className="block font-medium text-gray-700 mb-2">
+                Last Name <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Last Name"
+                className="w-full border border-gray-300 p-3 rounded focus:ring-2 focus:ring-red-600 outline-none"
+                required
+              />
+            </div>
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="block font-medium text-gray-700 mb-2">
+              Email <span className="text-red-600">*</span>
+            </label>
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full border border-gray-300 p-3 rounded focus:ring-2 focus:ring-red-600 outline-none"
+              required
+            />
+          </div>
+
+          {/* Phone */}
+          <div>
+            <label className="block font-medium text-gray-700 mb-2">
+              Phone/Mobile <span className="text-red-600">*</span>
+            </label>
+            <input
+              id="phone"
+              type="tel"
+              placeholder="Mobile Number"
+              className="w-full border border-gray-300 p-3 rounded focus:ring-2 focus:ring-red-600 outline-none"
+              required
+            />
+          </div>
+
+          {/* Address Section */}
+          <div>
+            <label className="block font-medium text-gray-700 mb-2">
+              Address
+            </label>
+            <div className="grid md:grid-cols-2 gap-6">
+              <input
+                type="text"
+                placeholder="Address Line 1"
+                className="border border-gray-300 p-3 rounded focus:ring-2 focus:ring-red-600 outline-none"
+              />
+              <input
+                type="text"
+                placeholder="Address Line 2"
+                className="border border-gray-300 p-3 rounded focus:ring-2 focus:ring-red-600 outline-none"
+              />
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 mt-6">
+              <input
+                type="text"
+                placeholder="City"
+                className="border border-gray-300 p-3 rounded focus:ring-2 focus:ring-red-600 outline-none"
+              />
+              <input
+                type="text"
+                placeholder="State"
+                className="border border-gray-300 p-3 rounded focus:ring-2 focus:ring-red-600 outline-none"
+              />
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 mt-6">
+              <input
+                type="text"
+                placeholder="Zip Code"
+                required
+                className="border border-gray-300 p-3 rounded focus:ring-2 focus:ring-red-600 outline-none"
+              />
+              <select
+                required
+                className="border border-gray-300 p-3 rounded focus:ring-2 focus:ring-red-600 outline-none"
+              >
+                <option value="">Select Country</option>
+                <option value="US">United States (US)</option>
+                <option value="CA">Canada</option>
+                <option value="GB">United Kingdom</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Dropdown Questions */}
+          <div>
+            <label className="block font-medium text-gray-700 mb-2">
+              Were you or a loved one exposed to Paraquat (herbicide) at work or
+              on farmland? <span className="text-red-600">*</span>
+            </label>
+            <select
+              required
+              className="w-full border border-gray-300 p-3 rounded focus:ring-2 focus:ring-red-600 outline-none"
+            >
+              <option value="">- Select -</option>
+              <option>Yes, personally exposed</option>
+              <option>Yes, a family member was exposed</option>
+              <option>No known exposure</option>
+              <option>Not sure</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block font-medium text-gray-700 mb-2">
+              Have you or a loved one been diagnosed with Parkinson’s disease?{" "}
+              <span className="text-red-600">*</span>
+            </label>
+            <select
+              required
+              className="w-full border border-gray-300 p-3 rounded focus:ring-2 focus:ring-red-600 outline-none"
+            >
+              <option value="">- Select -</option>
+              <option>Yes</option>
+              <option>No</option>
+              <option>Not sure</option>
+            </select>
+          </div>
+
+          {/* Consent */}
+          <div className="bg-gray-50 border border-gray-200 p-4 rounded">
+            <label className="flex items-start gap-3 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                required
+                className="mt-1 h-4 w-4 border-gray-300 text-red-600 focus:ring-red-500"
+              />
+              <span>
+                By checking the box, you agree to be contacted about your
+                potential case or promotional legal offers sent by or on behalf
+                of <strong>Perfect Legal Match, FusionByte Media, FindTheFirm</strong> and/or
+                participating law firms. You may receive live calls, automated
+                calls, emails or text messages even if you are on a national or
+                state “Do Not Call” list. Consent is not a condition of any
+                purchase. Contact may include automated dialing or prerecorded
+                messages.
+              </span>
+            </label>
+          </div>
+
+          {/* Submit Button */}
+          <div className="text-center pt-4">
+            <button
+              type="submit"
+              className="bg-[#dc2626] text-white px-10 py-3 font-semibold rounded-md hover:bg-red-700 transition-all duration-300"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    
+    
+    </section>
   );
 }

@@ -1,14 +1,12 @@
 'use client';
 
-import AboutUs from "@/Component/AboutUsPage";
-
-
+import PrivacyPolicy from "@/Component/PrivacyPolicy";
 
 
 export default function Privacy() {
   return (
     <main>
-      <AboutUs />
+      <PrivacyPolicy />
     </main>
   );
 }
