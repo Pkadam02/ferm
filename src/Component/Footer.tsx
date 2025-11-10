@@ -156,7 +156,7 @@ export default function Footer({
             </li>
             <li>
               <Link
-                href="/Service#s1"
+                href="/T&C"
                 className="hover:text-white text-gray-300 font-medium transition-colors duration-200"
               >
                 Terms & Conditions

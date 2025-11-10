@@ -1,6 +1,6 @@
 "use client";
 
-export default function TermsAndConditions() {
+export default function Page() {
   return (
     <div className="bg-white text-gray-800">
       {/* ---------- PAGE HEADER ---------- */}
