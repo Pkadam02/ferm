@@ -21,7 +21,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${archivo.variable} ${archivo.className} ${poppins.variable}`}>
-        <CustomCursor />
         <Navbar isOpen={isOpen} setIsOpen={setIsOpen} /> {/* Render Navbar */}
         {/* 👇 Wrap all content in SmoothScroll */}
         {children}
