@@ -25,7 +25,7 @@ export default function Footer({
         <div className="space-y-5">
           <div className="flex items-center">
             <Image
-              src="/6.png"
+              src="/Firm1.png"
               alt="FindTheFirm Logo"
               width={logoWidth}
               height={logoHeight}

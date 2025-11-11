@@ -21,15 +21,15 @@ export default function Navbar({ isOpen, setIsOpen }: NavbarProps) {
   }, []);
 
   return (
-    <header className="w-full h-25 relative z-50">
+    <header className="w-full h-20 relative z-50">
       {/* ===== Top Dark Header (Hidden on Mobile) ===== */}
       <div className="hidden md:flex bg-[#262626] py-6 justify-start pl-40">
         <Image
-          src="/logo.png"
+          src="/Firm1.png"
           alt="Find The Firm"
-          width={130}
+          width={100}
           height={55}
-          className="object-contain"
+          className="object-cover"
           priority
         />
       </div>
@@ -81,7 +81,7 @@ function NavbarContent({
       {/* ===== Mobile Logo ===== */}
       <div className="flex items-center md:hidden mt-[18px]">
         <Image
-          src="/logo1.png"
+          src="/Firm.png"
           alt="Find The Firm"
           width={100}
           height={35}
@@ -201,7 +201,7 @@ function NavbarContent({
               {/* Sidebar Header */}
               <div className="flex justify-between items-center p-5 border-b border-gray-200">
                 <Image
-                  src="/logo1.png"
+                  src="/Firm.png"
                   alt="Find The Firm"
                   width={120}
                   height={45}
