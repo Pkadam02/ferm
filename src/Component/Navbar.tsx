@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
-
+import firm1 from "../../public/Firm1.png"
 interface NavbarProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -25,7 +25,7 @@ export default function Navbar({ isOpen, setIsOpen }: NavbarProps) {
       {/* ===== Top Dark Header (Hidden on Mobile) ===== */}
       <div className="hidden md:flex bg-[#262626] py-6 justify-start pl-40">
         <Image
-          src="/Firm1.png"
+          src={firm1}
           alt="Find The Firm"
           width={100}
           height={55}
