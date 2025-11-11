@@ -25,7 +25,7 @@ export default function Navbar({ isOpen, setIsOpen }: NavbarProps) {
       {/* ===== Top Dark Header (Hidden on Mobile) ===== */}
       <div className="hidden md:flex bg-[#262626] py-6 justify-start pl-40">
         <Image
-          src="https://findthefirm.com/wp-content/uploads/2020/07/FTF-white-landscape.png"
+          src="/Firm1.png"
           alt="Find The Firm"
           width={90}
           height={55}
