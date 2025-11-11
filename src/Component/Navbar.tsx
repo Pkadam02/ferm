@@ -79,7 +79,7 @@ function NavbarContent({
   return (
     <nav className="flex items-center justify-between py-6 lg:py-4 sm:py-4">
       {/* ===== Mobile Logo ===== */}
-      <div className="flex items-center md:hidden mt-[18]">
+      <div className="flex items-center md:hidden mt-[18px]">
         <Image
           src="/logo1.png"
           alt="Find The Firm"
@@ -170,7 +170,7 @@ function NavbarContent({
 
       {/* ===== Mobile Hamburger ===== */}
       <button
-        className="md:hidden text-gray-800 mb-[-18]"
+        className="md:hidden text-gray-800 mb-[-18px]"
         onClick={toggleSidebar}
         aria-label="Toggle Menu"
       >
