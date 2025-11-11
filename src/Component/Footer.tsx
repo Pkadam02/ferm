@@ -12,7 +12,7 @@ interface FooterProps {
 }
 
 export default function Footer({
-  logoWidth = 90,
+  logoWidth = 70,
   logoHeight = 50,
 }: FooterProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -25,7 +25,7 @@ export default function Footer({
         <div className="space-y-5">
           <div className="flex items-center">
             <Image
-              src="https://findthefirm.com/wp-content/uploads/2020/07/FTF-white-landscape.png"
+              src="/logo.png"
               alt="FindTheFirm Logo"
               width={logoWidth}
               height={logoHeight}

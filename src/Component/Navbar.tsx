@@ -25,9 +25,9 @@ export default function Navbar({ isOpen, setIsOpen }: NavbarProps) {
       {/* ===== Top Dark Header (Hidden on Mobile) ===== */}
       <div className="hidden md:flex bg-[#262626] py-6 justify-start pl-40">
         <Image
-          src="/Firm1.png"
+          src="https://findthefirm.com/wp-content/uploads/2020/07/FTF-white-landscape.png"
           alt="Find The Firm"
-          width={90}
+          width={70}
           height={55}
           className="object-cover"
           priority
@@ -81,9 +81,9 @@ function NavbarContent({
       {/* ===== Mobile Logo ===== */}
       <div className="flex items-center md:hidden mt-[8px]">
         <Image
-          src="https://findthefirm.com/wp-content/uploads/2020/05/5.png"
+          src="/logo.png"
           alt="Find The Firm"
-          width={70}
+          width={60}
           height={35}
           priority
           className="object-contain"
@@ -201,9 +201,9 @@ function NavbarContent({
               {/* Sidebar Header */}
               <div className="flex justify-between items-center p-5 border-b border-gray-200">
                 <Image
-                  src="https://findthefirm.com/wp-content/uploads/2020/05/5.png"
+                  src="/logo.png"
                   alt="Find The Firm"
-                  width={120}
+                  width={60}
                   height={45}
                   className="object-contain"
                   priority
