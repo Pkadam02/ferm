@@ -85,7 +85,7 @@ export default function ContactPage() {
     <div className="absolute -z-10 top-0 left-1/2 transform -translate-x-1/2 w-[400px] sm:w-[500px] lg:w-[650px] h-[400px] sm:h-[500px] lg:h-[650px] bg-[url('/globe-bg.svg')] bg-contain bg-no-repeat opacity-10"></div>
 
     <Image
-      src="/image-contacts.png"
+      src="/https://findthefirm.com/wp-content/uploads/2020/12/image1-about-us.jpg"
       alt="Contact Person"
       width={800}
       height={900}
