@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import Image from "next/image";
 
 type FormShape = {
   firstName: string;
@@ -21,7 +22,13 @@ type FormShape = {
 
 export default function RoundupCasePage() {
   const phoneRef = useRef<HTMLInputElement | null>(null);
-  const itiRef = useRef<HTMLInputElement & { isValidNumber?: () => boolean; getNumber?: () => string; setNumber?: (num: string) => void; }>(null);
+  const itiRef = useRef<
+    HTMLInputElement & {
+      isValidNumber?: () => boolean;
+      getNumber?: () => string;
+      setNumber?: (num: string) => void;
+    }
+  >(null);
   const [msg, setMsg] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState<FormShape>({
@@ -137,10 +144,12 @@ export default function RoundupCasePage() {
           </div>
 
           <div className="flex justify-center">
-            <img
+            <Image
               src="/images/roundup3.jpg"
               alt="Roundup"
               className="w-full max-w-sm sm:max-w-md md:max-w-lg rounded shadow"
+              width={500}
+              height={300}
             />
           </div>
         </div>
@@ -150,10 +159,12 @@ export default function RoundupCasePage() {
       <section className="py-8 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div className="flex justify-center">
-            <img
+            <Image
               src="/images/roundup2.webp"
               alt="Roundup bottle"
               className="w-full max-w-sm sm:max-w-md md:max-w-lg rounded shadow"
+              width={500}
+              height={300}
             />
           </div>
 
@@ -198,10 +209,12 @@ export default function RoundupCasePage() {
           </div>
 
           <div className="flex justify-center">
-            <img
+            <Image
               src="/images/roundup4.jpg"
               alt="Roundup exposure"
               className="w-full max-w-sm sm:max-w-md md:max-w-lg rounded shadow"
+              width={500}
+              height={300}
             />
           </div>
         </div>
@@ -222,7 +235,7 @@ export default function RoundupCasePage() {
                 <div key={key}>
                   <label className="block text-sm font-medium">{label}</label>
                   <input
-                    value={(form as any)[key]}
+                    value={form[key as keyof FormShape] as string}
                     onChange={(e) => setForm({ ...form, [key]: e.target.value })}
                     className="mt-1 block w-full border rounded px-3 py-2"
                     required

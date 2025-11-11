@@ -23,10 +23,10 @@ export default function RobloxAbusePage() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value, type, ariaChecked } = e.target;
+    const { name, value, type } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checkIsOnDemandRevalidate : value,
+      [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     });
   };
 
@@ -319,7 +319,12 @@ export default function RobloxAbusePage() {
 }
 
 /* ===== Reusable Image/Text Sections ===== */
-function SectionImageLeft({ title, image, points }: any) {
+interface SectionImageLeftProps {
+  title: string;
+  image: string;
+  points: string[];
+}
+function SectionImageLeft({ title, image, points }: SectionImageLeftProps) {
   return (
     <section className="py-16 px-4 sm:px-10 lg:px-40 bg-white">
       <div className="grid md:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
@@ -351,7 +356,11 @@ function SectionImageLeft({ title, image, points }: any) {
   );
 }
 
-function SectionImageRight({ title, image }: any) {
+interface SectionImageRightProps {
+  title: string;
+  image: string;
+}
+function SectionImageRight({ title, image }: SectionImageRightProps) {
   return (
     <section className="py-16 px-4 sm:px-10 lg:px-40 bg-gray-50">
       <div className="grid md:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
