@@ -29,7 +29,7 @@ export default function CTASection() {
             </p>
 
             <a
-              href="/contact-us"
+              href="/contact"
               className="inline-block bg-white text-black font-semibold text-lg px-8 py-4 hover:bg-red-700 hover:text-white transition duration-300"
             >
               Start My Free Case Review Now
