@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
-import firm1 from "../../public/Firm1.png"
+
 interface NavbarProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -25,9 +25,9 @@ export default function Navbar({ isOpen, setIsOpen }: NavbarProps) {
       {/* ===== Top Dark Header (Hidden on Mobile) ===== */}
       <div className="hidden md:flex bg-[#262626] py-6 justify-start pl-40">
         <Image
-          src={firm1}
+          src="/Firm1.png"
           alt="Find The Firm"
-          width={100}
+          width={90}
           height={55}
           className="object-cover"
           priority
@@ -79,11 +79,11 @@ function NavbarContent({
   return (
     <nav className="flex items-center justify-between py-6 lg:py-4 sm:py-4">
       {/* ===== Mobile Logo ===== */}
-      <div className="flex items-center md:hidden mt-[18px]">
+      <div className="flex items-center md:hidden mt-[8px]">
         <Image
           src="/Firm.png"
           alt="Find The Firm"
-          width={100}
+          width={70}
           height={35}
           priority
           className="object-contain"
@@ -170,7 +170,7 @@ function NavbarContent({
 
       {/* ===== Mobile Hamburger ===== */}
       <button
-        className="md:hidden text-gray-800 mb-[-18px]"
+        className="md:hidden text-gray-800 mb-[-8px]"
         onClick={toggleSidebar}
         aria-label="Toggle Menu"
       >

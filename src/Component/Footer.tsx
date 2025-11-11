@@ -12,7 +12,7 @@ interface FooterProps {
 }
 
 export default function Footer({
-  logoWidth = 120,
+  logoWidth = 90,
   logoHeight = 50,
 }: FooterProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
