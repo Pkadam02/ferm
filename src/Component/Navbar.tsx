@@ -21,7 +21,7 @@ export default function Navbar({ isOpen, setIsOpen }: NavbarProps) {
   }, []);
 
   return (
-    <header className="w-full h-28 relative z-50">
+    <header className="w-full h-27 relative z-50">
       {/* ===== Top Dark Header (Hidden on Mobile) ===== */}
       <div className="hidden md:flex bg-[#262626] py-6 justify-start pl-40">
         <Image
