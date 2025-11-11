@@ -77,11 +77,11 @@ function NavbarContent({
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
-    <nav className="flex items-center justify-between py-6 sm:py-4">
+    <nav className="flex items-center justify-between py-6 lg:py-4 sm:py-4">
       {/* ===== Mobile Logo ===== */}
       <div className="flex items-center md:hidden mt-[18]">
         <Image
-          src="/logo1.png"
+          src="/logo.png"
           alt="Find The Firm"
           width={100}
           height={35}
