@@ -25,7 +25,7 @@ export default function Footer({
         <div className="space-y-5">
           <div className="flex items-center">
             <Image
-              src="/Firm1.png"
+              src="https://findthefirm.com/wp-content/uploads/2020/07/FTF-white-landscape.png"
               alt="FindTheFirm Logo"
               width={logoWidth}
               height={logoHeight}
