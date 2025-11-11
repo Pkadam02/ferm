@@ -5,8 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
-import logo from "../../public/logo.png";
-import logo1 from "../../public/logo1.png";
 
 interface NavbarProps {
   isOpen: boolean;
@@ -27,7 +25,7 @@ export default function Navbar({ isOpen, setIsOpen }: NavbarProps) {
       {/* ===== Top Dark Header (Hidden on Mobile) ===== */}
       <div className="hidden md:flex bg-[#262626] py-6 justify-start pl-40">
         <Image
-          src={logo}
+          src="/logo.png"
           alt="Find The Firm"
           width={130}
           height={55}
@@ -83,7 +81,7 @@ function NavbarContent({
       {/* ===== Mobile Logo ===== */}
       <div className="flex items-center md:hidden mt-[18]">
         <Image
-          src={logo1}
+          src="/logo1.png"
           alt="Find The Firm"
           width={100}
           height={35}
@@ -203,7 +201,7 @@ function NavbarContent({
               {/* Sidebar Header */}
               <div className="flex justify-between items-center p-5 border-b border-gray-200">
                 <Image
-                  src={logo1}
+                  src="/logo1.png"
                   alt="Find The Firm"
                   width={120}
                   height={45}
