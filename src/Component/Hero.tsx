@@ -22,7 +22,7 @@ const slides = [
     title: (
       <>
         Injured by a Drug or Device?
-        <br /> You're Not Alone.
+        <br /> You&apos;re Not Alone.
       </>
     ),
     subtitle:
