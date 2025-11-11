@@ -30,16 +30,16 @@ export default function HowItWorks() {
   const [active, setActive] = useState(1);
 
   return (
-    <section className="w-full bg-white py-3">
-      <div className="w-370 h-150 mx-auto flex flex-col lg:flex-row items-stretch overflow-hidden shadow-md">
-        {/* LEFT CONTENT (40%) */}
-        <div className="w-full lg:w-[40%] bg-[#282c34] flex flex-col justify-center px-8 lg:px-12 py-12">
+    <section className="w-full bg-white py-12 md:py-16">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-stretch shadow-lg rounded-lg overflow-hidden">
+        {/* ===== LEFT SECTION ===== */}
+        <div className="w-full lg:w-[45%] bg-[#1f1f23] flex flex-col justify-center px-6 sm:px-10 lg:px-14 py-10 sm:py-14">
           {/* Heading */}
           <div>
-            <p className="text-gray-400 uppercase tracking-wider text-sm font-semibold">
+            <p className="text-gray-400 uppercase tracking-widest text-sm font-semibold">
               How It Works
             </p>
-            <h2 className="text-3xl md:text-5xl font-light mt-2 text-white leading-snug">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light mt-2 text-white leading-snug">
               Our 3-Step Process Is Simple
             </h2>
           </div>
@@ -48,18 +48,18 @@ export default function HowItWorks() {
           <div className="space-y-4 mt-8">
             {steps.map((step) => (
               <div key={step.id} className="flex flex-col">
-                {/* Box with ID and Title */}
+                {/* Step Header */}
                 <button
                   onClick={() =>
                     setActive(active === step.id ? 0 : step.id)
                   }
-                  className={`flex justify-between items-center w-full px-5 py-3 font-semibold border transition-all duration-300 ${
+                  className={`flex justify-between items-center w-full px-5 py-3 text-left font-semibold border rounded-md transition-all duration-300 ${
                     active === step.id
                       ? "bg-[#dc2626] border-[#dc2626] text-white"
                       : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50"
                   }`}
                 >
-                  <span>
+                  <span className="text-[15px] sm:text-[16px]">
                     {step.id}. {step.title}
                   </span>
                   <motion.div
@@ -76,7 +76,7 @@ export default function HowItWorks() {
                   </motion.div>
                 </button>
 
-                {/* Content on background (outside box) */}
+                {/* Step Content */}
                 <AnimatePresence initial={false}>
                   {active === step.id && (
                     <motion.div
@@ -90,7 +90,7 @@ export default function HowItWorks() {
                       }}
                       className="mt-2 ml-2"
                     >
-                      <p className="text-white/90 text-lg leading-relaxed ">
+                      <p className="text-white/90 text-base sm:text-lg leading-relaxed">
                         {step.content}
                       </p>
                     </motion.div>
@@ -101,16 +101,17 @@ export default function HowItWorks() {
           </div>
         </div>
 
-        {/* RIGHT IMAGE (60%) */}
-        <div className="relative w-full lg:w-[60%] min-h-[480px] overflow-hidden">
+        {/* ===== RIGHT IMAGE SECTION ===== */}
+        <div className="relative w-full lg:w-[55%] min-h-[320px] sm:min-h-[400px] lg:min-h-[500px]">
           <Image
             src="/Disscusion.jpg"
             alt="How It Works Discussion"
             fill
             className="object-cover"
+            priority
           />
-          {/* Red Diagonal Overlay */}
-          <div className="absolute inset-0"></div>
+          {/* Optional overlay for better contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
         </div>
       </div>
     </section>

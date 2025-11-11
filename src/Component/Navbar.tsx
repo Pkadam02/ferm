@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ChevronDown } from "lucide-react";
 
 interface NavbarProps {
   isOpen: boolean;
@@ -20,23 +21,23 @@ export default function Navbar({ isOpen, setIsOpen }: NavbarProps) {
   }, []);
 
   return (
-    <header className="w-full h-31 relative">
-      {/* ===== Top dark bar with logo ===== */}
-      <div className="bg-[#262626] py-8 flex justify-start pl-40 relative">
+    <header className="w-full h-28 relative z-50">
+      {/* ===== Top Dark Header (Hidden on Mobile) ===== */}
+      <div className="hidden md:flex bg-[#262626] py-6 justify-start pl-40">
         <Image
-          src="/6.png"
+          src="/logo.png"
           alt="Find The Firm"
-          width={120}
-          height={50}
+          width={130}
+          height={55}
           className="object-contain"
+          priority
         />
       </div>
 
-      {/* ===== White navbar section ===== */}
+      {/* ===== Main White Navbar ===== */}
       <div className="relative">
         <AnimatePresence mode="wait">
           {isSticky ? (
-            // Sticky version with smooth slide down
             <motion.section
               key="sticky"
               initial={{ y: -80 }}
@@ -45,14 +46,13 @@ export default function Navbar({ isOpen, setIsOpen }: NavbarProps) {
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="fixed top-0 left-0 w-full bg-white shadow-lg z-50"
             >
-              <div className="max-w-7xl mx-auto bg-white">
+              <div className="max-w-7xl mx-auto px-6">
                 <NavbarContent isOpen={isOpen} setIsOpen={setIsOpen} />
               </div>
             </motion.section>
           ) : (
-            // Default position
             <section className="relative bg-transparent z-40">
-              <div className="max-w-7xl mx-auto -mt-6 bg-white shadow-md rounded-sm">
+              <div className="max-w-7xl mx-auto -mt-6 bg-white shadow-md rounded-sm px-6">
                 <NavbarContent isOpen={isOpen} setIsOpen={setIsOpen} />
               </div>
             </section>
@@ -63,7 +63,7 @@ export default function Navbar({ isOpen, setIsOpen }: NavbarProps) {
   );
 }
 
-/* ✅ NavbarContent component */
+/* ✅ Navbar Content Component (with Sidebar for Mobile) */
 function NavbarContent({
   isOpen,
   setIsOpen,
@@ -72,10 +72,26 @@ function NavbarContent({
   setIsOpen: (open: boolean) => void;
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
-    <div className="flex justify-start items-center">
-      <ul className="flex flex-wrap items-center space-x-10 py-4 text-[15px] font-semibold text-gray-900 ml-10">
+    <nav className="flex items-center justify-between py-6 sm:py-4">
+      {/* ===== Mobile Logo ===== */}
+      <div className="flex items-center md:hidden mt-[18]">
+        <Image
+          src="/logo1.png"
+          alt="Find The Firm"
+          width={100}
+          height={35}
+          priority
+          className="object-contain"
+        />
+      </div>
+
+      {/* ===== Desktop Navigation ===== */}
+      <ul className="hidden md:flex flex-wrap items-center space-x-10 text-[15px] font-semibold text-gray-900">
         <li>
           <Link href="/" className="hover:text-red-500 transition">
             Home
@@ -92,7 +108,7 @@ function NavbarContent({
           </Link>
         </li>
 
-        {/* ===== Dropdown ===== */}
+        {/* Dropdown */}
         <li
           className="relative"
           onMouseEnter={() => setDropdownOpen(true)}
@@ -100,15 +116,7 @@ function NavbarContent({
         >
           <button className="flex items-center hover:text-red-500 transition">
             Active Lawsuits
-            <svg
-              className="ml-1 w-4 h-4 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path d="M19 9l-7 7-7-7" />
-            </svg>
+            <ChevronDown className="ml-1 w-4 h-4" />
           </button>
 
           <AnimatePresence>
@@ -134,7 +142,11 @@ function NavbarContent({
                   <motion.li
                     key={href}
                     whileHover={{ x: 4 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20,
+                    }}
                   >
                     <Link
                       href={href}
@@ -155,6 +167,149 @@ function NavbarContent({
           </Link>
         </li>
       </ul>
-    </div>
+
+      {/* ===== Mobile Hamburger ===== */}
+      <button
+        className="md:hidden text-gray-800 mb-[-18]"
+        onClick={toggleSidebar}
+        aria-label="Toggle Menu"
+      >
+        {sidebarOpen ? <X size={28} /> : <Menu size={28} />}
+      </button>
+
+      {/* ===== Sidebar ===== */}
+      <AnimatePresence>
+        {sidebarOpen && (
+          <>
+            {/* Background overlay */}
+            <motion.div
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[998]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={toggleSidebar}
+            />
+
+            {/* Sidebar itself */}
+            <motion.aside
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="fixed top-0 right-0 w-72 sm:w-80 h-full bg-white shadow-2xl z-[999] flex flex-col"
+            >
+              {/* Sidebar Header */}
+              <div className="flex justify-between items-center p-5 border-b border-gray-200">
+                <Image
+                  src="/logo1.png"
+                  alt="Find The Firm"
+                  width={120}
+                  height={45}
+                  className="object-contain"
+                  priority
+                />
+                <button onClick={toggleSidebar}>
+                  <X size={26} className="text-gray-800" />
+                </button>
+              </div>
+
+              {/* Sidebar Links */}
+              <ul className="flex flex-col text-gray-800 font-semibold px-5 py-4 space-y-3 overflow-y-auto">
+                <li>
+                  <Link
+                    href="/"
+                    onClick={toggleSidebar}
+                    className="block py-2 hover:text-red-500"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/aboutus"
+                    onClick={toggleSidebar}
+                    className="block py-2 hover:text-red-500"
+                  >
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/FAQ"
+                    onClick={toggleSidebar}
+                    className="block py-2 hover:text-red-500"
+                  >
+                    Frequently Asked Questions
+                  </Link>
+                </li>
+
+                {/* Dropdown in sidebar */}
+                <li>
+                  <button
+                    className="w-full flex justify-between items-center py-2 hover:text-red-500"
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                  >
+                    Active Lawsuits
+                    <ChevronDown
+                      size={18}
+                      className={`transition-transform ${
+                        dropdownOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  <AnimatePresence>
+                    {dropdownOpen && (
+                      <motion.ul
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="ml-3 pl-2 border-l border-gray-300 mt-2 space-y-1 text-[14px]"
+                      >
+                        {[
+                          ["Paraquat Case Review", "/casestudy/cs1"],
+                          ["AFFF Firefighting Case Review", "/casestudy/cs2"],
+                          ["NEC Baby Formula Case Review", "/casestudy/cs3"],
+                          ["Talcum Powder Case Review", "/casestudy/cs4"],
+                          ["Roundup Case Review", "/casestudy/cs5"],
+                          ["Depo-Provera Free Case Review", "/casestudy/cs6"],
+                          ["No-Cost MVA Case Evaluation", "/casestudy/cs7"],
+                          ["Roblox Abuse Lawsuit", "/casestudy/cs8"],
+                          [
+                            "Institutional Sexual Abuse Case Review",
+                            "/casestudy/cs9",
+                          ],
+                        ].map(([label, href]) => (
+                          <li key={href}>
+                            <Link
+                              href={href}
+                              onClick={toggleSidebar}
+                              className="block py-1 hover:text-red-500"
+                            >
+                              {label}
+                            </Link>
+                          </li>
+                        ))}
+                      </motion.ul>
+                    )}
+                  </AnimatePresence>
+                </li>
+
+                <li>
+                  <Link
+                    href="/contact"
+                    onClick={toggleSidebar}
+                    className="block py-2 hover:text-red-500"
+                  >
+                    Contact Us
+                  </Link>
+                </li>
+              </ul>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 }

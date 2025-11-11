@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function FAQPage() {
@@ -72,128 +72,124 @@ export default function FAQPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* ---------- HEADER SECTION ---------- */}
+      {/* ===== HEADER SECTION ===== */}
       <div
-        className="relative flex items-center justify-center bg-center bg-cover h-[350px] md:h-[350px]"
+        className="relative flex items-center justify-center bg-center bg-cover h-[280px] sm:h-[320px] md:h-[350px]"
         style={{
           backgroundImage:
             "url('https://findthefirm.com/wp-content/uploads/2020/12/pheader-service.jpg')",
         }}
       >
-        <div className="absolute inset-0 bg-black/5"></div>
-        <div className="relative container mx-40 px-6">
-          <div className="flex items-center justify-left h-full">
-            <h1 className="text-4xl md:text-5xl font-bold text-white text-center">
-              Frequently Asked Questions
-            </h1>
-          </div>
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="relative container mx-auto px-6 sm:px-10 md:px-16 lg:px-32">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center md:text-left">
+            Frequently Asked Questions
+          </h1>
         </div>
       </div>
 
-      {/* ---------- INTRO SECTION ---------- */}
-      <section className="max-w-5xl mb-[-60] mx-48 px-6 py-16 text-left">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-4">
+      {/* ===== INTRO SECTION ===== */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 md:px-10 lg:px-24 py-12 md:py-16 text-left">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-4">
           Your Questions, Answered.
         </h2>
-        <p className="text-gray-600 leading-relaxed mb-3">
+        <p className="text-gray-600 leading-relaxed mb-3 text-sm sm:text-base">
           We understand how confusing and overwhelming the legal process can
           feel—especially when you’re already dealing with the emotional and
           physical toll of being harmed by a product or drug. This page is here
           to help you get the clarity you need.
         </p>
-        <p className="text-gray-600 leading-relaxed">
+        <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
           If your question isn’t listed here, feel free to reach out to our team
           directly.
         </p>
       </section>
 
-      {/* ---------- FAQ SECTION ---------- */}
-      <section className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {faqs.map((faq) => (
-          <div key={faq.id} className="flex flex-col">
-            {/* FAQ button */}
-            <button
-              onClick={() => setActive(active === faq.id ? null : faq.id)}
-              className={`flex justify-between items-center w-full px-5 py-4 text-left font-semibold border transition-all duration-300 rounded-md ${
-                active === faq.id
-                  ? "bg-black  text-white"
-                  : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50"
-              }`}
-            >
-              <span>
-                {faq.id}. {faq.title}
-              </span>
-              <motion.div
-                animate={{
-                  rotate: active === faq.id ? -90 : 0,
-                }}
-                transition={{ duration: 0.3 }}
+      {/* ===== FAQ SECTION ===== */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10 lg:px-24 py-12 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {faqs.map((faq) => (
+            <div key={faq.id} className="flex flex-col">
+              {/* FAQ Button */}
+              <button
+                onClick={() => setActive(active === faq.id ? null : faq.id)}
+                className={`flex justify-between items-center w-full px-4 sm:px-5 py-3 sm:py-4 text-left font-semibold border transition-all duration-300 rounded-md ${
+                  active === faq.id
+                    ? "bg-black text-white"
+                    : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50"
+                }`}
               >
-                <ArrowRight
-                  className={`w-5 h-5 ${
-                    active === faq.id ? "text-white" : "text-gray-800"
-                  }`}
-                />
-              </motion.div>
-            </button>
-
-            {/* Animated Answer */}
-            <AnimatePresence initial={false}>
-              {active === faq.id && (
+                <span className="text-sm sm:text-base">
+                  {faq.id}. {faq.title}
+                </span>
                 <motion.div
-                  key={faq.id}
-                  initial={{ height: 0, opacity: 0, y: -8 }}
-                  animate={{ height: "auto", opacity: 1, y: 0 }}
-                  exit={{ height: 0, opacity: 0, y: -8 }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="mt-2 ml-2 text-gray-700 border-l-4 border-black pl-4"
+                  animate={{
+                    rotate: active === faq.id ? -90 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <p className="leading-relaxed text-base">{faq.content}</p>
+                  <ArrowRight
+                    className={`w-5 h-5 ${
+                      active === faq.id ? "text-white" : "text-gray-800"
+                    }`}
+                  />
                 </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        ))}
-      </div>
-    </section>
+              </button>
 
-      {/* ---------- CTA SECTION ---------- */}
+              {/* Animated Answer */}
+              <AnimatePresence initial={false}>
+                {active === faq.id && (
+                  <motion.div
+                    key={faq.id}
+                    initial={{ height: 0, opacity: 0, y: -8 }}
+                    animate={{ height: "auto", opacity: 1, y: 0 }}
+                    exit={{ height: 0, opacity: 0, y: -8 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    className="mt-2 ml-2 text-gray-700 border-l-4 border-black pl-4"
+                  >
+                    <p className="leading-relaxed text-sm sm:text-base">
+                      {faq.content}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ===== CTA SECTION ===== */}
       <section
-  className="relative bg-cover bg-center text-white py-20 overflow-hidden"
-  style={{
-    backgroundImage:
-      "url('/banner1.jpg')",
-  }}
->
-  {/* Dark overlay */}
-  <div className="absolute inset-0 bg-white/10"></div>
-
-  {/* Content */}
-  <div className="relative max-w-3xl mx-auto px-6 grid md:grid-cols-2 items-center gap-8">
-    <div>
-      <p className="text-base text-gray-200 font-medium">
-        Our support team is happy to help.
-      </p>
-      <h2 className="text-4xl font-bold leading-snug mt-3">
-        Still Have Questions? <br /> We’re Here for You.
-      </h2>
-    </div>
-
-    <div className="flex md:justify-end justify-center">
-      <a
-        href="/contact-us"
-        className="bg-black text-white px-8 py-3 rounded-md font-semibold shadow-md hover:bg-gray-900 transition"
+        className="relative bg-cover bg-center text-white py-16 sm:py-20 overflow-hidden"
+        style={{
+          backgroundImage: "url('/banner1.jpg')",
+        }}
       >
-        CONTACT US
-      </a>
-    </div>
-  </div>
-</section>
+        <div className="absolute inset-0 bg-black/40"></div>
 
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 md:px-10 grid md:grid-cols-2 items-center gap-8">
+          <div>
+            <p className="text-sm sm:text-base text-gray-200 font-medium">
+              Our support team is happy to help.
+            </p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-snug mt-3">
+              Still Have Questions? <br /> We’re Here for You.
+            </h2>
+          </div>
 
-      {/* ---------- LEGAL NOTICE ---------- */}
-      <footer className="text-center text-gray-600 text-sm py-10 border-t border-gray-200 px-6 max-w-5xl mx-auto">
+          <div className="flex md:justify-end justify-center mt-6 md:mt-0">
+            <a
+              href="/contact-us"
+              className="bg-black text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-md font-semibold shadow-md hover:bg-gray-900 transition text-sm sm:text-base"
+            >
+              CONTACT US
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== LEGAL NOTICE ===== */}
+      <footer className="text-center text-gray-600 text-xs sm:text-sm py-10 border-t border-gray-200 px-4 sm:px-6 md:px-10 max-w-5xl mx-auto">
         <p>
           <strong>Legal Notice</strong>
           <br />

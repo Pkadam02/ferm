@@ -30,41 +30,28 @@ const faqs = [
 
 export default function FAQPreview() {
   const [active, setActive] = useState<number | null>(1);
-
-  // Refs for content wrappers (the inner content whose scrollHeight we measure)
   const contentRefs = useRef<Record<number, HTMLDivElement | null>>({});
-  // Measured heights in px
   const [heights, setHeights] = useState<Record<number, number>>({});
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  // Measure heights after first paint and on window resize
   useLayoutEffect(() => {
     const measure = () => {
       const newHeights: Record<number, number> = {};
       faqs.forEach((f) => {
         const el = contentRefs.current[f.id];
-        if (el) {
-          // use scrollHeight to get full content height even if hidden by wrapper
-          newHeights[f.id] = el.scrollHeight;
-        } else {
-          newHeights[f.id] = 0;
-        }
+        newHeights[f.id] = el?.scrollHeight || 0;
       });
       setHeights((prev) => {
-        // shallow compare to avoid frequent state updates
         let same = true;
-        for (const k of Object.keys(newHeights)) {
-          if (prev[+k] !== newHeights[+k]) {
-            same = false;
-            break;
-          }
+        for (const k in newHeights) {
+          if (prev[+k] !== newHeights[+k]) same = false;
         }
         return same ? prev : newHeights;
       });
     };
 
     measure();
-    // re-measure after fonts/images load (small delay)
-    const t = setTimeout(measure, 120);
+    const t = setTimeout(measure, 150);
     window.addEventListener("resize", measure);
     return () => {
       clearTimeout(t);
@@ -72,30 +59,27 @@ export default function FAQPreview() {
     };
   }, []);
 
-  // Small optimization: prevents pointer events when animating (optional)
-  // Not required but can reduce micro-jank on some devices
-  const [isAnimating, setIsAnimating] = useState(false);
-
   return (
-    <section className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-12 md:py-16 grid md:grid-cols-2 gap-8 md:gap-12 items-start">
       {/* LEFT IMAGE */}
-      <div className="overflow-hidden mt-[50px]">
+      <div className="overflow-hidden mt-4 md:mt-[50px]">
         <img
           src="https://findthefirm.com/wp-content/uploads/2021/10/Advisory-Board-header.jpg"
           alt="FAQ Discussion"
-          className="w-full h-auto object-cover rounded-lg "
+          className="w-full h-auto object-cover rounded-lg shadow-md"
         />
       </div>
 
       {/* RIGHT CONTENT */}
       <div>
-        <p className="text-sm font-semibold uppercase text-gray-500 mb-2">
+        <p className="text-xs sm:text-sm font-semibold uppercase text-gray-500 mb-2">
           Frequently Asked Questions
         </p>
-        <h2 className="text-4xl font-bold leading-snug mb-8 text-gray-900">
-          Have Questions? <br /> We’ve Got Answers.
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-snug mb-8 text-gray-900">
+          Have Questions? <br className="hidden sm:block" /> We’ve Got Answers.
         </h2>
 
+        {/* FAQ LIST */}
         <div className="space-y-4">
           {faqs.map((faq) => {
             const isActive = active === faq.id;
@@ -109,30 +93,36 @@ export default function FAQPreview() {
                 {/* Header */}
                 <button
                   onClick={() => setActive(isActive ? null : faq.id)}
-                  className={`flex justify-between items-center w-full px-5 py-3 text-left font-semibold rounded-md transition-colors duration-200 ${
-                    isActive ? "bg-[#dc2626] text-white" : "text-gray-900 hover:bg-gray-50"
+                  className={`flex justify-between items-center w-full px-4 sm:px-5 py-3 text-left font-semibold rounded-md transition-colors duration-200 ${
+                    isActive
+                      ? "bg-[#dc2626] text-white"
+                      : "text-gray-900 hover:bg-gray-50"
                   }`}
                   style={{
-                    // avoid layout changes from border/padding changes on toggle
                     willChange: "transform, opacity",
                     pointerEvents: isAnimating ? "none" : undefined,
                   }}
                 >
-                  <span>{faq.title}</span>
+                  <span className="text-sm sm:text-base">{faq.title}</span>
                   <motion.div
                     animate={{ rotate: isActive ? -90 : 0 }}
                     transition={{ duration: 0.25, ease: "easeOut" }}
                   >
                     <ArrowRight
-                      className={`w-5 h-5 ${isActive ? "text-white" : "text-gray-700"}`}
+                      className={`w-5 h-5 ${
+                        isActive ? "text-white" : "text-gray-700"
+                      }`}
                     />
                   </motion.div>
                 </button>
 
-                {/* Motion wrapper animates numeric height (px) — NO height:auto */}
+                {/* Expanding Content */}
                 <motion.div
                   initial={false}
-                  animate={{ height: isActive ? measured : 0, opacity: isActive ? 1 : 0 }}
+                  animate={{
+                    height: isActive ? measured : 0,
+                    opacity: isActive ? 1 : 0,
+                  }}
                   transition={{
                     height: { duration: 0.36, ease: [0.22, 0.9, 0.27, 1] },
                     opacity: { duration: 0.22, ease: "easeOut" },
@@ -142,17 +132,17 @@ export default function FAQPreview() {
                   style={{
                     overflow: "hidden",
                     willChange: "height, opacity",
-                    // prevent layout jump by forcing GPU-friendly compositing
                     transform: "translateZ(0)",
                   }}
                 >
-                  {/* The measured content — always in DOM so scrollHeight is available */}
                   <div
-                    ref={(el) => { contentRefs.current[faq.id] = el; }}
-                    className="px-5 pb-4 bg-gray-50 border-t border-gray-100"
+                    ref={(el) => {
+                      contentRefs.current[faq.id] = el;
+                    }}
+                    className="px-4 sm:px-5 pb-4 bg-gray-50 border-t border-gray-100"
                   >
                     <p
-                      className="text-gray-700 leading-relaxed pt-3"
+                      className="text-gray-700 leading-relaxed pt-3 text-sm sm:text-base"
                       dangerouslySetInnerHTML={{ __html: faq.content }}
                     />
                   </div>
@@ -163,10 +153,10 @@ export default function FAQPreview() {
         </div>
 
         {/* CTA BUTTON */}
-        <div className="mt-10 flex justify-center">
+        <div className="mt-8 md:mt-10 flex justify-center md:justify-start">
           <a
             href="/FAQ"
-            className="inline-block bg-[#dc2626] text-white font-semibold px-8 py-3 rounded-md shadow-md hover:bg-red-700 transition-all duration-200"
+            className="inline-block bg-[#dc2626] text-white font-semibold px-6 sm:px-8 py-2.5 sm:py-3 rounded-md shadow-md hover:bg-red-700 transition-all duration-200 text-sm sm:text-base"
           >
             VIEW FULL FAQ
           </a>
