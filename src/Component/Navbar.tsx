@@ -81,7 +81,7 @@ function NavbarContent({
       {/* ===== Mobile Logo ===== */}
       <div className="flex items-center md:hidden mt-[18]">
         <Image
-          src="/title.png"
+          src="/logo1.png"
           alt="Find The Firm"
           width={100}
           height={35}
